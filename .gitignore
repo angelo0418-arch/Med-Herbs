@@ -1,0 +1,6 @@
+# Ignore the dataset and image folders
+/Philippine Medicinal Plant Leaf Dataset/
+/predict_images/
+/Resized_Dataset/
+/venv/
+/preprocessing/Resized_Dataset/

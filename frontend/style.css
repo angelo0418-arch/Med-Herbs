@@ -1,0 +1,93 @@
+
+@media only screen and (max-width:900px) {
+    form {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #drop-area {
+        max-width: 350px;
+        padding: 15px;
+    }
+
+    #img-view img {
+        width: 40%;
+    }
+
+    .Click p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+}
+
+  /* Add borders to Login and Sign-up buttons outside the menu icon */
+@media (min-width: 992px) { /* Adjust width based on your navbar breakpoint */
+    #toggle-login, 
+    #toggle-signup {
+        border: 2px solid #fff;
+        border-radius: 5px; 
+        padding: 8px 16px; 
+        transition: all 0.3s ease; 
+    }
+
+    #toggle-login:hover,
+    #toggle-signup:hover {
+        background-color: #ccecda; /* White background on hover */
+        color: #198754; 
+    }
+}
+
+    
+#toggle-login {
+    margin-right: 10px; 
+}
+
+#toggle-signup {
+    margin-left: 10px;
+}
+    
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.upload-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 128, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+.upload-box {
+    border: 2px dashed #28a745;
+    padding: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.upload-box:hover {
+    background-color: #f1f8e9;
+}
+.file-input {
+    display: none;
+}
+#displayImage {
+    width: 100%;
+    border-radius: 12px;
+    display: none;
+}
+.result {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #2e7d32;
+}
