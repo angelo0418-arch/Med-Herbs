@@ -1,68 +1,49 @@
-# tf_inference.py
-
-import os
-import tensorflow as tf
+import os 
 import numpy as np
 import json
+import tensorflow as tf
 import matplotlib.pyplot as plt
 from PIL import Image
-import cv2
 
-# === LOAD THE TENSORFLOW MODEL ===
-model_path = os.path.abspath("herb_identification_model.h5")
-model = tf.keras.models.load_model(model_path)
-print("✅ TensorFlow Model Successfully Loaded and Ready for Inference!")
+# === FILE PATHS ===
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "herb_identification_model.h5")
+CLASS_INDICES_PATH = os.path.join(BASE_DIR, "class_indices.json")
+HERB_BENEFITS_PATH = os.path.join(BASE_DIR, "herb_benefits.json")
+IMAGE_PATH = os.path.abspath(os.path.join(BASE_DIR, "../predict_images/class7_95.jpg"))
 
-# === LOAD CLASS INDICES MAPPING ===
-class_indices_path = os.path.abspath("class_indices.json")
-try:
-    with open(class_indices_path, 'r') as f:
-        class_indices = json.load(f)
-except FileNotFoundError:
-    print("❌ Error: class_indices.json not found.")
-    class_indices = {}
+# === LOAD MODEL ===
+model = tf.keras.models.load_model(MODEL_PATH)
+print("✅ Model loaded successfully!")
 
-# === IMAGE PREPROCESSING FUNCTION ===
-def preprocess_image(image_path, target_size):
-    img = cv2.imread(image_path)
-    if img is None:
-        raise FileNotFoundError(f"Image not found at {image_path}")
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img = cv2.resize(img, target_size)
-    img = img / 255.0  # Normalize to [0, 1]
-    img = np.expand_dims(img, axis=0)
-    return img
+# === LOAD JSON FILES ===
+with open(CLASS_INDICES_PATH, 'r') as f:
+    class_indices = json.load(f)
 
-# === LOAD THE TEST IMAGE ===
-image_path = os.path.abspath("../predict_images/image.png")  # Palitan ang filename kung iba ang image
-input_shape = model.input_shape[1:3]  # Get input shape from model
-input_data = preprocess_image(image_path, input_shape)
+with open(HERB_BENEFITS_PATH, 'r') as f:
+    herb_benefits = json.load(f)
 
-# === DISPLAY THE PREPROCESSED IMAGE ===
-plt.imshow(input_data[0])
-plt.title("Preprocessed Image")
-plt.axis('off')
-plt.show()
+class_labels = {int(k): v for k, v in class_indices.items()}
+
+# === IMAGE PREPROCESSING ===
+def preprocess_image(image_path):
+    img = Image.open(image_path).resize((224, 224))
+    img_array = np.array(img) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
 
 # === RUN INFERENCE ===
-predictions = model.predict(input_data).flatten()  # Flatten for consistency
+img_array = preprocess_image(IMAGE_PATH)
+predictions = model.predict(img_array)
+predicted_class_index = np.argmax(predictions)
+confidence = np.max(predictions)
 
-# === DISPLAY RAW PREDICTIONS ===
-print("\n📊 Raw Model Output:")
-print(predictions)
+# === CHECK CONFIDENCE THRESHOLD ===
+if confidence < 0.5:
+    print("\nOops! This doesn't seem to be a herb. Please try again with the correct image.")
+else:
+    predicted_herb = class_labels.get(predicted_class_index, "Unknown Herb")
+    herb_benefit = herb_benefits.get(predicted_herb, "No available information.")
 
-# === APPLY SOFTMAX ===
-predictions = tf.nn.softmax(predictions).numpy()
-
-# === DISPLAY SOFTMAX OUTPUT ===
-print("\n📊 Softmax Output:")
-print(predictions)
-
-# === GET TOP-1 PREDICTION ===
-predicted_class = np.argmax(predictions)
-class_name = class_indices.get(str(predicted_class), "Unknown Class")
-confidence = predictions[predicted_class] * 100
-
-print(f"\n🔍 Predicted Class Index: {predicted_class}")
-print(f"🌿 Predicted Herb: {class_name}")
-print(f"🎯 Confidence: {confidence:.2f}%")
+    print(f"\n🌿 Predicted Herb: {predicted_herb}")
+    print(f"💡 Herb Benefits: {herb_benefit}")

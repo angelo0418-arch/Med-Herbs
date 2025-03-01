@@ -11,7 +11,8 @@ from tensorflow.keras.layers import (
 )
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.regularizers import l2
-from preprocessing.data_loader import train_generator  
+from preprocessing.data_loader import load_data
+ 
 
 def build_model():
     model = Sequential([ 

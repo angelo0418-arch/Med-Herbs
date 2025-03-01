@@ -4,11 +4,11 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 
 
-model = load_model('herb_classifier_model.h5')
+model = load_model('herb_identification_model.h5')
 
 
 test_data_dir = 'C:\\Users\\ACER\\Desktop\\System_MedHerbs\\Philippine Medicinal Plant Leaf Dataset\\test'
-img_height, img_width = 128, 128  
+img_height, img_width = 224, 224  
 batch_size = 16
 
 

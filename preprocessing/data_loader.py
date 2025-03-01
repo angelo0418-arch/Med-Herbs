@@ -1,11 +1,7 @@
 import sys
 import os
-from preprocessing.data_augmentation import get_data_generator
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-
-# Tawagin ang get_data_generator para makuha ang tatlong datagen
-train_datagen, val_datagen, test_datagen = get_data_generator()
+from .data_augmentation import get_data_generator
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # ✅ Global Setting: Madaling Baguhin ang Batch Size Dito
 BATCH_SIZE = 16  # Mas mababang batch size para bawas memory usage
@@ -39,31 +35,31 @@ def load_data():
     if not all([check_directory(train_dir), check_directory(val_dir), check_directory(test_dir)]):
         raise FileNotFoundError("❌ ERROR: Please check your dataset directories.")
     
-    # ✅ ImageDataGenerator Initialization
-    datagen = ImageDataGenerator(rescale=1./255)
+    # ✅ Tawagin ang get_data_generator
+    train_datagen, val_datagen, test_datagen = get_data_generator()
 
     # ✅ Load Training Data
-    train_data = datagen.flow_from_directory(
+    train_data = train_datagen.flow_from_directory(
         train_dir, 
-        target_size=(128, 128), 
+        target_size=(224, 224),  # Ginawang Consistent ang target_size
         class_mode='categorical', 
         batch_size=BATCH_SIZE,
         shuffle=True
     )
 
     # ✅ Load Validation Data
-    val_data = datagen.flow_from_directory(
+    val_data = val_datagen.flow_from_directory(
         val_dir, 
-        target_size=(128, 128), 
+        target_size=(224, 224),  # Ginawang Consistent ang target_size
         class_mode='categorical', 
         batch_size=BATCH_SIZE,
         shuffle=False
     )
 
     # ✅ Load Test Data
-    test_data = datagen.flow_from_directory(
+    test_data = test_datagen.flow_from_directory(
         test_dir, 
-        target_size=(128, 128), 
+        target_size=(224, 224),  # Ginawang Consistent ang target_size
         class_mode='categorical', 
         batch_size=BATCH_SIZE,
         shuffle=False

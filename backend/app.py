@@ -1,96 +1,75 @@
-from flask import Flask, request, jsonify, render_template_string
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from werkzeug.utils import secure_filename
-from flask_cors import CORS  
+from flask_cors import CORS
 import os
+import json
 import numpy as np
 from PIL import Image
-import tensorflow as tf
+import tensorflow as tf  
 
-app = Flask(__name__)
-CORS(app)  
+# 🔹 CONFIG
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ML_MODEL_DIR = os.path.join(BASE_DIR, "../ml_model")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg'}
+# 🔹 LOAD MODEL
+MODEL_PATH = os.path.join(ML_MODEL_DIR, "herb_identification_model.h5")
+model = tf.keras.models.load_model(MODEL_PATH)
 
+# 🔹 LOAD JSON FILES
+with open(os.path.join(ML_MODEL_DIR, "class_indices.json"), 'r') as f:
+    class_indices = json.load(f)
 
-model = tf.keras.models.load_model('../ml_model/herb_identification_model.h5')
+with open(os.path.join(ML_MODEL_DIR, "herb_benefits.json"), 'r') as f:
+    herb_benefits = json.load(f)
 
+class_names = [class_indices[str(i)] for i in range(len(class_indices))]
 
-herb_labels = [
-     "Aloe barbadensis Miller", "Annona muricata", "Antidesma bunius", "Arachis hypogaea", 
-    "Averrhoea bilimbi", "Blumea balsamifera", "Capsicum frutescens", "Carmona retusa", 
-    "Centella asiatica", "Citrus aurantiifolia", "Citrus maxima", "Citrus microcarpa", 
-    "Citrus sinensis", "Coleus scutellarioides", "Corchorus olitorius", "Curcuma longa", 
-    "Euphorbia hirta", "Gliricidia sepium", "Hibiscus rosa-sinensis", "Impatiens balsamina", 
-    "Ipomoea batatas", "Jatropha curcas", "Lagerstroemia speciosa", "Leucaena leucocephala", 
-    "Mangifera indica", "Manihot esculenta", "Mentha cordifolia Opiz", "Momordica charantia", 
-    "Moringa oleifera", "Nerium oleander", "Ocimum basilicum", "Origanum vulgare", 
-    "Pandanus amaryllifolius", "Pepromia pellucida", "Phyllanthus niruri", "Premna odorata", 
-    "Psidium guajava", "Senna alata", "Tamarindus indica", "Vitex negundo"
-] 
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
-
+# 🔹 IMAGE PREPROCESSING
 def preprocess_image(image_path):
-    img = Image.open(image_path)
-    img = img.resize((128, 128))  
-    img = np.array(img) / 255.0
-    img = np.expand_dims(img, axis=0)
-    return img
+    img = Image.open(image_path).resize((224, 224))
+    img_array = np.array(img) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
 
+# 🔹 PREDICTION FUNCTION
+def predict_image(image_path):
+    img_array = preprocess_image(image_path)
+    prediction = model.predict(img_array)
 
-@app.route('/', methods=['GET', 'POST'])
+    predicted_class = np.argmax(prediction)
+    confidence = np.max(prediction)
+
+    if confidence < 0.5:
+        return "Oops! This doesn't seem to be a herb. Please try again with the correct image.", ""
+
+    herb_name = class_names[predicted_class]
+    benefit = herb_benefits.get(herb_name, "No information available.")
+    return herb_name, benefit
+
+# 🔹 FLASK ROUTES
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/')
 def index():
-    message = None
-    prediction = None
+    return render_template('index.html')
 
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            message = 'No file part in the request'
-        else:
-            file = request.files['file']
+@app.route('/predict', methods=['POST'])
+def predict():
+    file = request.files.get('file')
+    if file and '.' in file.filename and file.filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS:
+        file_path = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
+        file.save(file_path)
 
-            if file.filename == '':
-                message = 'No selected file'
-            elif file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(file_path)
+        herb, benefit = predict_image(file_path)
+        return jsonify({'herb': herb, 'benefit': benefit})
 
-                
-                processed_image = preprocess_image(file_path)
-
-                
-                prediction_probs = model.predict(processed_image)
-                predicted_class = np.argmax(prediction_probs, axis=1)[0]
-                prediction = herb_labels[predicted_class]
-
-                message = f'File uploaded successfully: {filename}'
-            else:
-                message = 'Invalid file type. Only png, jpg, jpeg are allowed.'
-
-    return render_template_string('''
-        <h2>Medicinal Herb Identification System</h2>
-        <p>Upload an image to identify the medicinal herb:</p>
-        <form method="post" enctype="multipart/form-data">
-            <input type="file" name="file" accept="image/png, image/jpeg">
-            <button type="submit">Upload Image</button>
-        </form>
-        {% if message %}
-        <p><strong>{{ message }}</strong></p>
-        {% endif %}
-        {% if prediction %}
-        <h3>Prediction Result: {{ prediction }}</h3>
-        {% endif %}
-    ''', message=message, prediction=prediction)
+    return jsonify({'error': 'Invalid file type'}), 400
 
 if __name__ == '__main__':
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
-    
     app.run(debug=True, port=8000)

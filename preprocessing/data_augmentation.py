@@ -15,12 +15,11 @@ def get_data_generator():
         rotation_range=20,
         width_shift_range=0.1,
         height_shift_range=0.1,
-        shear_range=0.2,
-        zoom_range=0.3,
+        shear_range=0.15,  # Bahagyang binawasan ang shear
+        zoom_range=0.2,   # Bahagyang binawasan ang zoom
         horizontal_flip=True,
-        vertical_flip=True,
         fill_mode='nearest',
-        brightness_range=[0.8, 1.2],  # Nag-aadjust ng brightness mula 50% hanggang 150%
+        brightness_range=[0.9, 1.1],  # Bahagyang mas natural na brightness adjustment
     )
 
     # I-setup ang ImageDataGenerator para sa validation (karaniwan walang augmentation)
@@ -36,7 +35,7 @@ def get_data_generator():
 # ✅ Ipakita ang sample output ng data augmentation:
 # Palitan ang 'sample_image.jpg' ng tamang path ng iyong sample image.
 sample_image_path = r'C:/Users/ACER/Desktop/System_MedHerbs/Philippine Medicinal Plant Leaf Dataset/test/Moringa oleifera/Class5_2.jpg'
-img = load_img(sample_image_path, target_size=(128, 128))  # I-resize sa 128x128
+img = load_img(sample_image_path, target_size=(224, 224))  # Ginawang consistent ang target_size
 img_array = img_to_array(img)
 img_array = np.expand_dims(img_array, axis=0)  # Gawing batch ang image
 
