@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, url_for
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 import os
@@ -6,6 +6,7 @@ import json
 import numpy as np
 from PIL import Image
 import tensorflow as tf  
+from datetime import datetime
 
 # 🔹 CONFIG
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -51,9 +52,14 @@ def predict_image(image_path):
     benefit = herb_benefits.get(herb_name, "No information available.")
     return herb_name, benefit
 
-# 🔹 FLASK ROUTES
+# 🔹 FLASK APP
 app = Flask(__name__)
 CORS(app)
+
+# ✅ Inject timestamp para maiwasan ang cache sa static files
+@app.context_processor
+def inject_time():
+    return {'time': datetime.utcnow().timestamp()}
 
 @app.route('/')
 def index():

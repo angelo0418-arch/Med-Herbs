@@ -1,16 +1,28 @@
-// Main Function to Handle Image Upload and Prediction
 function handleImageUpload() {
     const fileInput = document.getElementById('imageUpload');
     const file = fileInput.files[0];
     const loading = document.getElementById('loading');
     const prediction = document.getElementById('prediction');
     const benefit = document.getElementById('benefit');
+    const imagePreview = document.getElementById('imagePreview');
 
-    // Check if a file is selected
+    if (!fileInput || !loading || !prediction || !benefit || !imagePreview) {
+        console.error("One or more elements are missing in the DOM.");
+        return;
+    }
+
     if (!file) {
         alert('Please select an image to upload.');
         return;
     }
+
+    // Display uploaded image preview
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        imagePreview.src = event.target.result;
+        imagePreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
 
     // Check network status
     if (!navigator.onLine) {
@@ -26,14 +38,11 @@ function handleImageUpload() {
     // Adjust loading speed based on network signal
     const connection = navigator.connection || {};
     const effectiveType = connection.effectiveType || '4g';
-    const loadingDuration = effectiveType === '4g' ? 1000 : 3000;
+    const loadingDuration = (effectiveType === '4g' || !effectiveType) ? 1000 : 3000;
 
     // Prepare FormData for Upload
     const formData = new FormData();
     formData.append('file', file);
-
-    console.log('Starting image upload...');
-    console.log('Selected file:', file);
 
     setTimeout(() => {
         fetch('http://127.0.0.1:5000/predict', {
@@ -41,40 +50,30 @@ function handleImageUpload() {
             body: formData
         })
         .then(response => {
-            console.log('Response status:', response.status);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             return response.json();
         })
         .then(data => {
-            console.log('Response data:', data);
             loading.style.display = 'none';
 
             if (data.error) {
-                prediction.innerHTML = `⚠️ ${data.error}`;
+                prediction.innerHTML = `❌ Error: ${data.error}`;
             } else if (data.warning) {
-                prediction.innerHTML = `⚠️ ${data.warning}`;
+                prediction.innerHTML = `⚠️ Warning: ${data.warning}`;
             } else {
-                prediction.innerHTML = `🌿 Herb: ${data.herb}`;
-                benefit.innerHTML = `💚 Benefits: ${data.benefit}`;
+                prediction.innerHTML = `🌿 Herb: <strong>${data.herb}</strong>`;
+                benefit.innerHTML = `💚 Benefits: <strong>${data.benefit}</strong>`;
             }
         })
         .catch(error => {
-            console.error('Error:', error);
             loading.style.display = 'none';
             prediction.innerHTML = '❌ Prediction failed. Please try again.';
+            console.error("Error fetching prediction:", error);
         });
     }, loadingDuration);
 }
 
-// Automatic Trigger for Image Upload
+// Attach event listener once
 document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
-
-// Event Listener for Network Status Change
-window.addEventListener('online', () => {
-    alert('You are back online!');
-});
-window.addEventListener('offline', () => {
-    alert('You are offline. Some features may not work.');
-});

@@ -1,5 +1,5 @@
 from tensorflow.keras import models, layers, regularizers, initializers
-from dropout import add_dropout  # Import Dropout function
+from dropout import add_dropout 
 
 def build_model(num_classes):
     model = models.Sequential([
@@ -8,9 +8,9 @@ def build_model(num_classes):
                       kernel_regularizer=regularizers.l2(0.0001), 
                       input_shape=(224, 224, 3)),
         layers.BatchNormalization(),
-        layers.Activation('swish'),  # Swish Activation
+        layers.Activation('swish'),  
         layers.MaxPooling2D((2, 2)),
-        add_dropout(0.3),  # Adjustable Dropout
+        add_dropout(0.3),  
 
         layers.Conv2D(64, (3, 3), padding="same", 
                       kernel_initializer=initializers.HeNormal(),
