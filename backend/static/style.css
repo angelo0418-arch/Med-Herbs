@@ -7,62 +7,68 @@ body {
     margin: 0;
 }
 
-/* Navbar Fix */
+/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
+    padding: 10px;
 }
+
+.navbar-brand {
+    font-size: 20px; /* Mas maliit para hindi lumaki sa mobile */
+}
+
+/* Offcanvas menu adjustments */
+.offcanvas {
+    width: 75%;
+}
+
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Gagawing full height para laging nasa gitna */
+    padding: 20px; /* Para hindi masyadong dikit sa gilid sa mobile */
+}
+
 
 /* Container */
 .container.text-center {
+    background: white;
     padding: 20px;
     border-radius: 10px;
     max-width: 550px;
-    width: 90%; /* Responsive width */
-    max-height: none; /* Removed height limit */
-    text-align: center;
-    margin-top: 80px; /* Adjusted margin to avoid navbar overlap */
-    overflow-y: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-top: 90px;
 }
 
 /* Instruction Text */
 .instruction-text {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
     color: #2d6a4f;
     margin-bottom: 15px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) { /* Tablet */
-    .container.text-center {
-        width: 95%;
-    }
-}
-
-@media (max-width: 480px) { /* Mobile */
-    .container.text-center {
-        width: 98%;
-    }
-}
-
 /* File Upload Button */
 .custom-file-upload {
-    margin-top: 20px;
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #28a745;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
+    transition: 0.3s;
 }
 
 .custom-file-upload:hover {
-    background-color: #45a049;
+    background-color: #218838;
 }
 
 /* Image Preview */
@@ -85,7 +91,6 @@ body {
 /* Loading Animation */
 .loading {
     display: none;
-    font-weight: bold;
     color: #FF5722;
     margin-top: 10px;
     animation: blink 1s infinite;
@@ -104,9 +109,79 @@ body {
     padding: 5px;
 }
 
-/* Scrollable Container */
-.main-content {
-    max-height: calc(100vh - 80px); /* Ensures it doesn't overlap navbar */
-    overflow-y: auto;
-    padding-top: 20px;
+/* Login & Signup Forms */
+#login-form, #signup-form {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) { /* Tablets */
+    .container.text-center {
+        width: 95%;
+    }
+    
+    .navbar-brand {
+        font-size: 22px;
+    }
+
+    .custom-file-upload {
+        font-size: 18px;
+        padding: 14px 28px;
+    }
+}
+
+@media (max-width: 768px) { /* Small Tablets & Large Phones */
+    .container.text-center {
+        width: 98%;
+    }
+
+    .navbar {
+        padding: 5px;
+    }
+
+    .navbar-brand {
+        font-size: 20px;
+    }
+
+    .custom-file-upload {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+
+    #imagePreview {
+        max-width: 200px;
+    }
+}
+
+@media (max-width: 480px) { /* Mobile Phones */
+    .container.text-center {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .instruction-text {
+        font-size: 20px;
+    }
+
+    .navbar-brand {
+        font-size: 18px;
+    }
+
+    .custom-file-upload {
+        font-size: 16px;
+        padding: 12px 20px;
+        width: 80%;
+    }
+
+    #imagePreview {
+        max-width: 180px;
+    }
+
+    #login-form, #signup-form {
+        width: 100%;
+        padding: 15px;
+    }
 }
