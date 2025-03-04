@@ -85,3 +85,37 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("❌ Element #imageUpload not found in DOM!");
     }
 });
+
+
+
+
+
+ 
+function showContent(sectionId) {
+    // Itago lahat ng sections
+    document.querySelectorAll('.content, .main-wrapper, .form-container').forEach(section => {
+        section.classList.add('d-none');
+    });
+
+    // Ipakita lang ang napiling section
+    let section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.remove('d-none');
+    }
+
+    // Disable scrolling kapag nasa login o sign-up form
+    if (sectionId === 'login-form' || sectionId === 'signup-form') {
+        document.body.style.overflow = 'hidden'; // Disable scroll
+    } else {
+        document.body.style.overflow = 'auto'; // Enable scroll kapag bumalik sa ibang section
+    }
+}
+
+
+function closeOffcanvas() {
+    var offcanvas = document.getElementById('offcanvasNavbar');
+    var bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
+    if (bsOffcanvas) {
+        bsOffcanvas.hide();
+    }
+}

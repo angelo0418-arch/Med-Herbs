@@ -39,37 +39,65 @@ body {
 /* Container */
 .container.text-center {
     background: white;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 30px;
+    border-radius: 15px;
     max-width: 550px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2); );
+    width: 500%;
+    text-align: center;
     margin-top: 90px;
+    height: auto;
 }
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 /* Instruction Text */
 .instruction-text {
     font-size: 22px;
     font-weight: bold;
     color: #2d6a4f;
-    margin-bottom: 15px;
+    margin-top: 30px;
 }
 
 /* File Upload Button */
 .custom-file-upload {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 12px 25px;
     font-size: 16px;
+    font-weight: bold;
     background-color: #28a745;
     color: white;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
+    margin-top: 10px;
 }
 
 .custom-file-upload:hover {
     background-color: #218838;
+    transform: scale(1.05);
 }
+
+.preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+}
+
+
+
 
 /* Image Preview */
 .preview-container {
@@ -81,9 +109,9 @@ body {
 
 #imagePreview {
     width: 100%;
-    max-width: 250px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    max-width: 280px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     display: none;
     margin: 20px auto;
 }
@@ -91,7 +119,9 @@ body {
 /* Loading Animation */
 .loading {
     display: none;
+    font-size: 16px;
     color: #FF5722;
+    font-weight: bold;
     margin-top: 10px;
     animation: blink 1s infinite;
 }
@@ -103,7 +133,6 @@ body {
 /* Prediction Text */
 #prediction, #benefit {
     font-size: 16px;
-    font-weight: bold;
     margin-top: 10px;
     word-wrap: break-word;
     padding: 5px;
@@ -116,6 +145,14 @@ body {
     margin: 20px auto;
     padding: 20px;
 }
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    justify-content: center;
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 1024px) { /* Tablets */
@@ -183,5 +220,54 @@ body {
     #login-form, #signup-form {
         width: 100%;
         padding: 15px;
+    }
+}
+
+#user-guide {
+    margin-top: 40px;
+}
+
+
+
+#about {
+    margin-top: 40px;
+}
+
+
+
+
+
+
+
+/* Center the form properly */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Center vertically */
+}
+
+/* Form styling */
+.form-login, .form-signup {
+    width: 100%;
+    max-width: 400px; /* Set max width */
+    background-color: #fff; /* White background */
+}
+
+/* Improve form input fields */
+.form-control {
+    border-width: 2px;
+    padding: 10px;
+}
+
+/* Button hover effect */
+.btn-success:hover {
+    background-color: #157347;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 10px;
     }
 }
