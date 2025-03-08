@@ -59,13 +59,11 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(data => {
                 loading.style.display = 'none';
 
-                if (data.error) {
-                    prediction.innerHTML = `❌ Error: ${data.error}`;
-                } else if (data.warning) {
-                    prediction.innerHTML = `⚠️ Warning: ${data.warning}`;
+                if (data.error || data.warning) {
+                    prediction.innerHTML = '❌ Prediction failed. Please try again.';
                 } else {
-                    prediction.innerHTML = `🌿 Herb: <strong>${data.herb}</strong>`;
-                    benefit.innerHTML = `💚 Benefits: <strong>${data.benefit}</strong>`;
+                    prediction.innerHTML = `🌿 <strong>Herb</strong>: ${data.herb}`;
+                    benefit.innerHTML = `💚 <strong>Benefits</strong>: ${data.benefit}`;
                 }
             })
             .catch(error => {
@@ -85,10 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("❌ Element #imageUpload not found in DOM!");
     }
 });
-
-
-
-
 
  
 function showContent(sectionId) {
@@ -119,3 +113,4 @@ function closeOffcanvas() {
         bsOffcanvas.hide();
     }
 }
+

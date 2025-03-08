@@ -22,46 +22,48 @@
                     <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <ul class="navbar-nav mx-auto text-center fs-5">
+                    <ul class="navbar-nav mx-auto text-center fs-5 mt-2">
                         <li class="nav-item"><a class="nav-link text-white" href="#" onclick="closeOffcanvas(); showContent('main-wrapper')">Home</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="#" onclick="closeOffcanvas(); showContent('user-guide')">User Guide</a></li>
                         <li class="nav-item"><a class="nav-link text-white" href="#" onclick="closeOffcanvas(); showContent('about')">About</a></li>                        
                     </ul>
 
-                <!-- Mobile View: Simple Buttons -->
-                <div class="d-flex flex-column align-items-center mt-3 d-lg-none">
-                    <button class="btn w-100 mb-2 border-0 shadow-none" onclick="closeOffcanvas(); showContent('login-form')">
-                        Login
-                    </button>
-                    <button class="btn w-100 border-0 shadow-none" onclick="closeOffcanvas(); showContent('signup-form')">
-                        Sign-up
-                    </button>
-                </div>
+                   <!-- Mobile View: Simple Buttons -->
+                    <div class="d-flex flex-column align-items-center d-lg-none">
+                        <button class="btn w-100 my-2 border-0 shadow-none fs-5 text-white" onclick="closeOffcanvas(); showContent('login-form')">
+                            Login
+                        </button>
+                        <button class="btn w-100 my-2 border-0 shadow-none fs-5 text-white" onclick="closeOffcanvas(); showContent('signup-form')">
+                            Sign-up
+                        </button>
+                    </div>
 
-                <!-- Desktop View: Styled Buttons -->
-                <div class="d-none d-lg-flex gap-2">
-                    <button class="btn btn-success rounded-pill px-3 py-2 shadow" onclick="closeOffcanvas(); showContent('login-form')">
-                        Login
-                    </button>
-                    <button class="btn btn-outline-light rounded-pill px-3 py-2 shadow" onclick="closeOffcanvas(); showContent('signup-form')">
-                        Sign-up
-                    </button>
-                </div>
+
+                    <!-- Desktop View: Styled Buttons -->
+                    <div class="d-none d-lg-flex gap-2">
+                        <button class="btn btn-success rounded-pill px-3 py-2 shadow" onclick="closeOffcanvas(); showContent('login-form')">
+                            Login
+                        </button>
+                        <button class="btn btn-outline-light rounded-pill px-3 py-2 shadow" onclick="closeOffcanvas(); showContent('signup-form')">
+                            Sign-up
+                        </button>
+                    </div>
 
                 </div>
             </div>
         </div>
     </nav>
     
-    <div id="user-guide" class="content text-center p-5 d-none">
-        <h2>User Guide</h2>
+    <div id="user-guide" class="content text-center p-5 d-none mt-5">
+        <h2>User Guide</h2> 
         <p>MedHerbs is a web platform that helps users identify medicinal herbs and learn about their benefits.</p>
     </div>
     
-    <div id="about" class="content text-center p-5 d-none">
+    <div id="about" class="content text-center p-5 d-none mt-5">
         <h2>About Us</h2>
         <p>MedHerbs is dedicated to educating users on herbal medicine and natural remedies.</p>
     </div>
+
 
 
     <div id="login-form" class="form-container d-none">
@@ -119,7 +121,7 @@
     
 
     
-<div id="main-wrapper" class="main-wrapper">
+<div id="main-wrapper" class="main-wrapper mt-5">
     <div class="container text-center">
         <!-- Instruction Text -->
         <p class="instruction-text">🌿 Upload an image to identify the herb 🌿</p>
@@ -143,7 +145,6 @@
         <p id="benefit"></p>
     </div>
 </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
