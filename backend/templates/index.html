@@ -10,6 +10,20 @@
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
+    <!-- Flash Messages -->
+<div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+
     <nav class="navbar navbar-expand-lg bg-success fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand text-white" style="font-size: 30px;" href="#">MedHerbs</a>
@@ -65,18 +79,17 @@
     </div>
 
 
-
     <div id="login-form" class="form-container d-none">
-        <form class="form-login border shadow rounded p-4">
+        <form class="form-login border shadow rounded p-4" onsubmit="login(event)">
             <h4 class="text-center mb-4">Login</h4>
             <div class="mb-3">
                 <label for="loginEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control border-success" id="loginEmail" required>
+                <input type="email" class="form-control border-success" id="loginEmail" name="email" required>
             </div>
     
             <div class="mb-3">
                 <label for="loginPassword" class="form-label">Password</label>
-                <input type="password" class="form-control border-success" id="loginPassword" required>
+                <input type="password" class="form-control border-success" id="loginPassword" name="password" required>
             </div>
     
             <button type="submit" class="btn btn-success w-100 mt-3">Login</button>
@@ -90,24 +103,23 @@
         </form>
     </div>
     
-
     <div id="signup-form" class="form-container d-none">
-        <form class="form-signup border shadow rounded p-4">
+        <form class="form-signup border shadow rounded p-4" onsubmit="signup(event)">
             <h4 class="text-center mb-4">Sign Up</h4>
-            
+    
             <div class="mb-3">
                 <label for="signupUsername" class="form-label">Username</label>
-                <input type="text" class="form-control border-success" id="signupUsername" required>
+                <input type="text" class="form-control border-success" id="signupUsername" name="username" required>
             </div>
     
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control border-success" id="signupEmail" required>
+                <input type="email" class="form-control border-success" id="signupEmail" name="email" required>
             </div>
     
             <div class="mb-3">
                 <label for="signupPassword" class="form-label">Password</label>
-                <input type="password" class="form-control border-success" id="signupPassword" required>
+                <input type="password" class="form-control border-success" id="signupPassword" name="password" required>
             </div>
     
             <button type="submit" class="btn btn-success w-100 mt-3">Sign Up</button>
@@ -117,8 +129,7 @@
                 <a href="#" class="text-primary text-decoration-none" onclick="showContent('login-form')">Login</a>
             </div>
         </form>
-    </div>
-    
+    </div>  
 
     
 <div id="main-wrapper" class="main-wrapper mt-5">

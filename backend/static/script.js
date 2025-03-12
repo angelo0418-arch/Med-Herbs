@@ -1,7 +1,7 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     function handleImageUpload() {
         const fileInput = document.getElementById('imageUpload');
-        const file = fileInput?.files[0]; // Optional chaining to prevent errors
+        const file = fileInput?.files[0]; 
         const loading = document.getElementById('loading');
         const prediction = document.getElementById('prediction');
         const benefit = document.getElementById('benefit');
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Display uploaded image preview
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = function (event) {
             imagePreview.src = event.target.result;
             imagePreview.style.display = 'block';
         };
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
         formData.append('file', file);
 
         setTimeout(() => {
-            fetch('http://127.0.0.1:5000/predict', {
+            fetch("http://127.0.0.1:8000/predict/predict", {
                 method: 'POST',
                 body: formData
             })
@@ -84,28 +84,76 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
- 
+// ✅ FIXED LOGIN FUNCTION
+function login(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    fetch("http://127.0.0.1:8000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+
+        if (data.status === "success") {
+            showContent('main-wrapper'); // Redirect to Home after login
+        }
+    })
+    .catch(error => {
+        console.error("Login Error:", error);
+    });
+
+    closeOffcanvas(); // Close menu after login
+}
+
+// ✅ FIXED SIGNUP FUNCTION
+function signup(event) {
+    event.preventDefault();
+
+    const username = document.getElementById("signupUsername").value;
+    const email = document.getElementById("signupEmail").value;
+    const password = document.getElementById("signupPassword").value;
+
+    fetch("http://127.0.0.1:8000/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+
+        if (data.status === "success") {
+            showContent('login-form'); // Redirect to login after successful signup
+        }
+    })
+    .catch(error => {
+        console.error("Signup Error:", error);
+    });
+
+    closeOffcanvas(); // Close menu after signup
+}
+
+// ✅ FUNCTION TO SHOW CONTENT
 function showContent(sectionId) {
-    // Itago lahat ng sections
     document.querySelectorAll('.content, .main-wrapper, .form-container').forEach(section => {
         section.classList.add('d-none');
     });
 
-    // Ipakita lang ang napiling section
     let section = document.getElementById(sectionId);
     if (section) {
         section.classList.remove('d-none');
     }
 
-    // Disable scrolling kapag nasa login o sign-up form
-    if (sectionId === 'login-form' || sectionId === 'signup-form') {
-        document.body.style.overflow = 'hidden'; // Disable scroll
-    } else {
-        document.body.style.overflow = 'auto'; // Enable scroll kapag bumalik sa ibang section
-    }
+    document.body.style.overflow = (sectionId === 'login-form' || sectionId === 'signup-form') ? 'hidden' : 'auto';
 }
 
-
+// ✅ FUNCTION TO CLOSE OFFCANVAS MENU
 function closeOffcanvas() {
     var offcanvas = document.getElementById('offcanvasNavbar');
     var bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
@@ -114,3 +162,35 @@ function closeOffcanvas() {
     }
 }
 
+
+
+// LOGIN FUNCTION
+function login(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("loginEmail").value;
+    const password = document.getElementById("loginPassword").value;
+
+    fetch("http://127.0.0.1:8000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+
+        if (data.status === "success") {
+            if (data.role === "admin") {
+                window.location.href = "/admin_dashboard"; // Redirect sa admin dashboard
+            } else {
+                window.location.href = "/user_dashboard"; // Redirect sa user dashboard
+            }
+        }
+    })
+    .catch(error => {
+        console.error("Login Error:", error);
+    });
+}

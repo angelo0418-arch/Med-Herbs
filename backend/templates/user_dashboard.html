@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>📂 Upload History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Herb Identified</th>
+                <th>Date Uploaded</th>
+            </tr>
+        </thead>
+        <tbody id="uploadHistory">
+            <!-- Data will be loaded here -->
+        </tbody>
+    </table>
+
+    <script>
+        fetch('http://127.0.0.1:8000/uploads/history')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('uploadHistory');
+            data.forEach(item => {
+                const row = `<tr>
+                                <td><img src="${item.image_path}" width="50"></td>
+                                <td>${item.predicted_herb}</td>
+                                <td>${item.uploaded_at}</td>
+                             </tr>`;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => console.error("Error fetching upload history:", error));
+    </script>
+</body>
+</html>
