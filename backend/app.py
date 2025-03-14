@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, session
+﻿from flask import Flask, request, jsonify, render_template, session
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from flask_mysqldb import MySQL
@@ -11,10 +11,11 @@ import tensorflow as tf
 from datetime import datetime
 import logging
 
-# ✅ Import Blueprints (Tanggalin ang duplicate import)
+# ✅ Import Blueprints
 from routes.herb_routes import herbs_bp
 from routes.uploads_routes import uploads_bp
 from routes.predict_routes import predict_bp
+from routes.login_signup_routes import auth_bp
 
 # 🔹 FLASK CONFIG
 app = Flask(__name__)
@@ -39,14 +40,15 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
 
-# 🔹 REGISTER BLUEPRINTS (Dapat pagkatapos ng `app = Flask(__name__)`)
+# 🔹 REGISTER BLUEPRINTS
 app.register_blueprint(herbs_bp, url_prefix='/herbs')
 app.register_blueprint(uploads_bp, url_prefix='/uploads')
-app.register_blueprint(predict_bp, url_prefix='/predict')  # ✅ Fix missing `url_prefix`
+app.register_blueprint(predict_bp, url_prefix='/predict')
+app.register_blueprint(auth_bp, url_prefix='/auth')
 
 # 🔹 SECURITY CONFIG (Sessions)
 app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_SECURE'] = False  # 🔴 Set to True sa production
+app.config['SESSION_COOKIE_SECURE'] = False  # ⚠ Set to True sa production
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 # ✅ Inject timestamp para maiwasan ang cache sa static files
@@ -63,6 +65,11 @@ def test():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# 🔹 USER DASHBOARD ROUTE
+@app.route('/user_dashboard')
+def user_dashboard():
+    return render_template('user_dashboard.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=8000)

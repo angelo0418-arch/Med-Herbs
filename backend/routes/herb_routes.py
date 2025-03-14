@@ -1,10 +1,11 @@
-from flask import Blueprint, request, jsonify
+﻿from flask import Blueprint, request, jsonify
 from db_config import get_db_connection
+
 
 # Blueprint Initialization
 herbs_bp = Blueprint('herbs', __name__)
 
-# 🔹 Route to get all herbs
+# ðŸ”¹ Route to get all herbs
 @herbs_bp.route('/', methods=['GET'])
 def get_herbs():
     conn = get_db_connection()
@@ -15,7 +16,7 @@ def get_herbs():
     conn.close()
     return jsonify(herbs)
 
-# 🔹 Route to get a specific herb by ID
+# ðŸ”¹ Route to get a specific herb by ID
 @herbs_bp.route('/<int:herb_id>', methods=['GET'])
 def get_herb(herb_id):
     conn = get_db_connection()
@@ -28,7 +29,7 @@ def get_herb(herb_id):
         return jsonify(herb)
     return jsonify({"message": "Herb not found"}), 404
 
-# 🔹 Route to add a new herb
+# ðŸ”¹ Route to add a new herb
 @herbs_bp.route('/', methods=['POST'])
 def add_herb():
     data = request.json

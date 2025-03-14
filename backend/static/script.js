@@ -91,7 +91,7 @@ function login(event) {
     const email = document.getElementById("loginEmail").value;
     const password = document.getElementById("loginPassword").value;
 
-    fetch("http://127.0.0.1:8000/login", {
+    fetch("http://127.0.0.1:8000/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -101,7 +101,11 @@ function login(event) {
         alert(data.message);
 
         if (data.status === "success") {
-            showContent('main-wrapper'); // Redirect to Home after login
+            if (data.role === "admin") {
+                window.location.href = "/admin_dashboard"; // Redirect sa admin dashboard
+            } else {
+                window.location.href = "/user_dashboard"; // Redirect sa user dashboard
+            }
         }
     })
     .catch(error => {
@@ -119,21 +123,28 @@ function signup(event) {
     const email = document.getElementById("signupEmail").value;
     const password = document.getElementById("signupPassword").value;
 
-    fetch("http://127.0.0.1:8000/signup", {
+    if (!username || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    fetch("http://127.0.0.1:8000/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password })
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
-
-        if (data.status === "success") {
-            showContent('login-form'); // Redirect to login after successful signup
+        if (data.error) {
+            alert("Signup failed: " + data.error);
+        } else {
+            alert("Signup successful! Redirecting to login...");
+            window.location.href = "/"; // ✅ Redirect to login page
         }
-    })
+    })  
     .catch(error => {
         console.error("Signup Error:", error);
+        alert("Something went wrong. Please try again.");
     });
 
     closeOffcanvas(); // Close menu after signup
@@ -163,34 +174,34 @@ function closeOffcanvas() {
 }
 
 
-
-// LOGIN FUNCTION
-function login(event) {
-    event.preventDefault();
-
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    fetch("http://127.0.0.1:8000/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
+// user_dashboard
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('http://127.0.0.1:8000/uploads/history')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to fetch data");
+        }
+        return response.json();
     })
-    .then(response => response.json())
     .then(data => {
-        alert(data.message);
+        const tableBody = document.getElementById('uploadHistory');
+        tableBody.innerHTML = "";  // Clear loading text
 
-        if (data.status === "success") {
-            if (data.role === "admin") {
-                window.location.href = "/admin_dashboard"; // Redirect sa admin dashboard
-            } else {
-                window.location.href = "/user_dashboard"; // Redirect sa user dashboard
-            }
+        if (data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="3">No upload history found.</td></tr>`;
+        } else {
+            data.forEach(item => {
+                const row = `<tr>
+                                <td><img src="/static/uploads/${item.image_path}" width="50" alt="Uploaded Image"></td>
+                                <td>${item.predicted_herb}</td>
+                                <td>${new Date(item.uploaded_at).toLocaleString()}</td>
+                             </tr>`;
+                tableBody.innerHTML += row;
+            });
         }
     })
     .catch(error => {
-        console.error("Login Error:", error);
+        console.error("Error fetching upload history:", error);
+        document.getElementById('uploadHistory').innerHTML = `<tr><td colspan="3">⚠ Error loading history.</td></tr>`;
     });
-}
+});
