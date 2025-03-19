@@ -1,7 +1,8 @@
 ﻿from flask import Blueprint, request, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from db_config import get_db_connection
-import mysql.connector  
+import mysql.connector
+from flask import Blueprint, render_template, redirect, url_for, session
 
 # ✅ Gumawa ng `auth_bp` Blueprint
 auth_bp = Blueprint('auth_bp', __name__)
@@ -23,7 +24,7 @@ def login():
     conn.close()
 
     if user and check_password_hash(user['password_hash'], password):
-        return jsonify({'message': 'Login successful', 'status': 'success'}), 200  # HTTP 200: OK
+        return jsonify({'message': 'Login successful', 'status': 'success'}), 200
     else:
         return jsonify({'error': 'Invalid email or password'}), 401  # HTTP 401: Unauthorized
 
@@ -51,7 +52,7 @@ def signup():
             return jsonify({'error': 'Email already registered'}), 400  
 
         cursor.execute("INSERT INTO users (username, email, password_hash) VALUES (%s, %s, %s)",
-                       (username, email, password_hash))
+                    (username, email, password_hash))
         conn.commit()
         return jsonify({'message': 'User registered successfully'}), 201  
 
@@ -62,3 +63,8 @@ def signup():
         cursor.close()
         conn.close()
 
+
+@auth_bp.route('/logout')
+def logout():
+    session.clear()  # I-clear ang session para ma-log out ang user
+    return redirect(url_for('auth_bp.login'))  # I-redirect pabalik sa login page

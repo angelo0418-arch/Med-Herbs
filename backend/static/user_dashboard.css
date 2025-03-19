@@ -1,0 +1,52 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+nav h2 {
+    margin: 0;
+}
+
+#logoutBtn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+/* Upload History Table */
+.upload-history {
+    width: 90%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+
+/* ✅ Profile Dropdown Styles */
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+#userDropdown::after {
+    display: none;  /* Tinatanggal ang default dropdown arrow */
+}
+
+.profile-img {
+    margin: auto;    /* Awtomatikong ilalagay sa gitna */
+}
+
+
+

@@ -195,39 +195,3 @@ body {
         padding: 10px;
     }
 }
-
-
-
-
-/* user_dashboard */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4fff4;
-    text-align: center;
-}
-
-h2 {
-    color: #2a7a2a;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-}
-
-th {
-    background-color: #2a7a2a;
-    color: white;
-}
-
-td img {
-    border-radius: 8px;
-}

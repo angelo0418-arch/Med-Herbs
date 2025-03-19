@@ -174,34 +174,3 @@ function closeOffcanvas() {
 }
 
 
-// user_dashboard
-document.addEventListener("DOMContentLoaded", function () {
-    fetch('http://127.0.0.1:8000/uploads/history')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to fetch data");
-        }
-        return response.json();
-    })
-    .then(data => {
-        const tableBody = document.getElementById('uploadHistory');
-        tableBody.innerHTML = "";  // Clear loading text
-
-        if (data.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="3">No upload history found.</td></tr>`;
-        } else {
-            data.forEach(item => {
-                const row = `<tr>
-                                <td><img src="/static/uploads/${item.image_path}" width="50" alt="Uploaded Image"></td>
-                                <td>${item.predicted_herb}</td>
-                                <td>${new Date(item.uploaded_at).toLocaleString()}</td>
-                             </tr>`;
-                tableBody.innerHTML += row;
-            });
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching upload history:", error);
-        document.getElementById('uploadHistory').innerHTML = `<tr><td colspan="3">⚠ Error loading history.</td></tr>`;
-    });
-});
