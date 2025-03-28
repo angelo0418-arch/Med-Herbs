@@ -55,9 +55,17 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="toggleProfile()">Upload History</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item text-danger" href="#" onclick="logout()">Logout</a></li>
+            <li>
+                <a class="dropdown-item text-danger logout-link" href="#" onclick="logout(event)" id="logoutBtn">
+                    Logout
+                    <span id="logoutSpinner" style="display: none; margin-left: 8px;">
+                        <div class="spinner-border spinner-border-sm" role="status"></div>
+                    </span>
+                </a>
+            </li>               
         </ul>
     </div>
+    
     
 
         <!-- Loading Animation (Nakatago sa simula) -->

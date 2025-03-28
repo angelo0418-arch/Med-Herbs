@@ -163,15 +163,40 @@ function handleImageUpload() {
 }
 
 
-// Logout Function
-function logout() {
-    fetch("/auth/logout", { method: "POST" })  // Magpadala ng POST request sa /auth/logout
+// Logout Function (Panatilihin ang dropdown habang naglo-logout)
+function logout(event) {
+    event.stopPropagation(); // Pigilan ang pagsara ng dropdown
+
+    const logoutBtn = document.getElementById("logoutBtn");
+    const logoutSpinner = document.getElementById("logoutSpinner");
+
+    if (!logoutBtn || !logoutSpinner) {
+        console.error("❌ Logout button o spinner hindi natagpuan.");
+        return;
+    }
+
+    // I-disable ang logout button at ipakita ang loading spinner
+    logoutBtn.style.pointerEvents = "none";
+    logoutSpinner.style.display = "inline-block";
+
+    // Magpadala ng logout request
+    fetch("/auth/logout", { method: "POST" })
         .then(response => {
             if (response.ok) {
-                window.location.href = "/";  // I-redirect pabalik sa index.html
+                // Maghintay ng 2 segundo bago i-redirect sa index.html
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 2000);
             } else {
-                alert("Logout failed. Pakisubukang muli.");
+                alert("❌ Logout failed. Pakisubukang muli.");
+                logoutBtn.style.pointerEvents = "auto";
+                logoutSpinner.style.display = "none";
             }
         })
-        .catch(error => console.error("Logout error:", error));  // Magpakita ng error sa console kung may problema
+        .catch(error => {
+            console.error("❌ Logout error:", error);
+            alert("❌ May problema sa logout. Pakisubukang muli.");
+            logoutBtn.style.pointerEvents = "auto";
+            logoutSpinner.style.display = "none";
+        });
 }

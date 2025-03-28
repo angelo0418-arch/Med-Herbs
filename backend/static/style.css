@@ -37,14 +37,13 @@ body {
 
 /* Container */
 .container.text-center {
-    background: white;
+    background: white; /* Panatilihin ang white background */
     padding: 40px;
-    border-radius: 15px;
+    border-radius: 10px;
     max-width: 550px;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    /* padding-top: 100px; */
-    
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Malambot na shadow */
+    border: 1px solid #4CAF50; /* Eleganteng green border */
 }
 
 /* Instruction Text */
