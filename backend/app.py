@@ -10,12 +10,14 @@ from PIL import Image
 import tensorflow as tf  
 from datetime import datetime
 import logging
+from routes.dataset_updates import dataset_updates_bp  # Import the Blueprint
 
 # ✅ Import Blueprints
 from routes.herb_routes import herbs_bp
 from routes.uploads_routes import uploads_bp
 from routes.predict_routes import predict_bp
 from routes.login_signup_routes import auth_bp
+from routes.dataset_updates import dataset_updates_bp  # Alisin ang 'backend.'
 
 # 🔹 FLASK CONFIG
 app = Flask(__name__)
@@ -45,6 +47,8 @@ app.register_blueprint(herbs_bp, url_prefix='/herbs')
 app.register_blueprint(uploads_bp, url_prefix='/uploads')
 app.register_blueprint(predict_bp, url_prefix='/predict')
 app.register_blueprint(auth_bp, url_prefix='/auth')
+app.register_blueprint(dataset_updates_bp)
+
 
 # 🔹 SECURITY CONFIG (Sessions)
 app.config['SESSION_COOKIE_HTTPONLY'] = True
