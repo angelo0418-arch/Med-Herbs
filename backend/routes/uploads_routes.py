@@ -36,11 +36,28 @@ def upload_file():
 
         # ✅ Kunin ang `user_id`
         try:
-            user_id = int(request.form.get("user_id", 0))
-            if user_id == 0:
-                return jsonify({"error": "User ID is required"}), 400
+            user_id = request.form.get("user_id")
+            
+            if not user_id or not user_id.isdigit():
+                return jsonify({"error": "Invalid User ID"}), 400
+            
+            user_id = int(user_id)  # Convert to integer
+
+            # ✅ I-check kung ang user ay umiiral sa `users` table bago mag-insert
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT id FROM users WHERE id = %s", (user_id,))
+            existing_user = cursor.fetchone()
+            
+            if not existing_user:
+                return jsonify({"error": "Invalid User ID. User does not exist."}), 400
+        
         except ValueError:
             return jsonify({"error": "Invalid User ID"}), 400
+        
+        finally:
+            cursor.close()
+            conn.close()
 
         # ✅ Predict herb automatically
         predicted_herb, benefit = predict_image(file_path)
@@ -55,10 +72,19 @@ def upload_file():
         cursor = conn.cursor()
 
         try:
-            cursor.execute("""
-                INSERT INTO uploads (user_id, image_path, predicted_herb) 
-                VALUES (%s, %s, %s)
-            """, (user_id, file_path, predicted_herb))
+            # I-check muna kung may existing user_id sa users table
+            cursor.execute("SELECT id FROM users WHERE id = %s", (user_id,))
+            existing_user = cursor.fetchone()
+
+            if not existing_user:
+                return jsonify({"error": "User does not exist in the database."}), 400
+
+            # Kapag valid, saka lang mag-insert
+            cursor.execute(
+                "INSERT INTO uploads (user_id, image_path, predicted_herb) VALUES (%s, %s, %s)",
+                (user_id, file_path, herb)
+            )
+
             conn.commit()
 
             cursor.execute("SELECT LAST_INSERT_ID()")
@@ -66,6 +92,7 @@ def upload_file():
 
         except Exception as e:
             return jsonify({"message": "Database error", "error": str(e)}), 500
+        
         finally:
             cursor.close()
             conn.close()

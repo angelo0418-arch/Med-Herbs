@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const loading = document.getElementById('loading');
         const prediction = document.getElementById('prediction');
         const benefit = document.getElementById('benefit');
-        const imagePreview = document.getElementById('imagePreview');
+        const imagePreview = document.getElementById('imagePreview');   
 
         if (!fileInput || !loading || !prediction || !benefit || !imagePreview) {
             console.error("❌ One or more elements are missing in the DOM.");
@@ -45,11 +45,23 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData();
         formData.append('file', file);
 
+        if (typeof userId !== "undefined" && userId !== null) {
+            formData.append("user_id", userId);
+        }
+        
+        console.log("📌 Sending image to /predict/"); 
+        console.log("📌 File selected:", file.name);
+        console.log("📌 File type:", file.type);
+
         setTimeout(() => {
-            fetch("http://127.0.0.1:8000/predict/predict", {
+            fetch("http://127.0.0.1:8000/predict", {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // ✅ Siguraduhin na JSON response ang hinihingi
+                }
             })
+            
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -59,20 +71,41 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 loading.style.display = 'none';
 
-                if (data.error || data.warning) {
-                    prediction.innerHTML = '❌ Prediction failed. Please try again.';
+                if (data.warning) {
+                    prediction.innerHTML = data.warning; // Ipakita ang warning message mula sa backend
+                    
                 } else {
                     prediction.innerHTML = `🌿 <strong>Herb</strong>: ${data.herb}`;
                     benefit.innerHTML = `💚 <strong>Benefits</strong>: ${data.benefit}`;
                 }
             })
-            .catch(error => {
+
+            .catch(async (error) => {
                 loading.style.display = 'none';
-                prediction.innerHTML = '❌ Prediction failed. Please try again.';
+                prediction.innerHTML = '❌ Prediction failed. Please check console logs.';
+            
                 console.error("Error fetching prediction:", error);
+            
+                try {
+                    const errorData = await error.json();
+                    console.error("Backend Error Response:", errorData);
+                    prediction.innerHTML = `❌ Error: ${errorData.error || "Unknown error"}`;
+                } catch (err) {
+                    console.error("❌ Failed to parse error response.");
+                }
             });
+            
+            
+
         }, loadingDuration);
     }
+
+    const userId = sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
+
+    if (!userId) {
+        console.warn("⚠️ No user is logged in. Proceeding as guest.");
+    }
+    
 
     // Attach event listener once HTML is fully loaded
     const fileInput = document.getElementById('imageUpload');
@@ -80,7 +113,11 @@ document.addEventListener("DOMContentLoaded", function () {
         fileInput.addEventListener('change', handleImageUpload);
         console.log("✅ Event listener added to #imageUpload");
     } else {
-        console.error("❌ Element #imageUpload not found in DOM!");
+        if (!fileInput) {
+            console.warn("⚠️ Warning: #imageUpload not found. Skipping event listener.");
+            return;
+        }
+        
     }
 });
 
@@ -150,6 +187,8 @@ function signup(event) {
     closeOffcanvas(); // Close menu after signup
 }
 
+
+
 // ✅ FUNCTION TO SHOW CONTENT
 function showContent(sectionId) {
     document.querySelectorAll('.content, .main-wrapper, .form-container').forEach(section => {
@@ -172,5 +211,3 @@ function closeOffcanvas() {
         bsOffcanvas.hide();
     }
 }
-
-
