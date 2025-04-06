@@ -18,31 +18,6 @@ function fetchUserData() {
         .catch(error => console.error("Error fetching user data:", error));
 }
 
-// 🔹 FETCH UPLOAD HISTORY
-function fetchUploadHistory() {
-    fetch("/uploads/history")
-        .then(response => response.json())
-        .then(data => {
-            const historyBody = document.getElementById("uploadHistory");
-            historyBody.innerHTML = "";
-
-            if (data.length === 0) {
-                historyBody.innerHTML = '<tr><td colspan="3">No uploads yet.</td></tr>';
-            } else {
-                data.forEach(upload => {
-                    const row = `
-                        <tr>
-                            <td><img src="/uploads/${upload.image_path}" width="50"></td>
-                            <td>${upload.herb_name}</td>
-                            <td>${upload.upload_date}</td>
-                        </tr>`;
-                    historyBody.innerHTML += row;
-                });
-            }
-        })
-        .catch(error => console.error("Error fetching upload history:", error));
-}
-
 // 🔹 LOGOUT FUNCTION
 function logout() {
     fetch("/auth/logout", { method: "POST" })
@@ -132,7 +107,7 @@ function handleImageUpload() {
     formData.append('file', file);
 
     setTimeout(() => {
-        fetch("/predict/predict", {
+        fetch("/predict", {
             method: 'POST',
             body: formData
         })

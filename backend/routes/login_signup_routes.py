@@ -28,7 +28,7 @@ def login():
     cursor.close()
     conn.close()
     
-    if user and check_password_hash(user['password_hash'], password):
+    if user and bcrypt.checkpw(password.encode('utf-8'), user['password_hash'].encode('utf-8')):
         # ✅ Gumawa ng session-based login
         session['user_id'] = user['id']
         session['username'] = user['username']
@@ -55,7 +55,9 @@ def signup():
         return jsonify({'error': 'All fields are required'}), 400
 
     # ✅ Hash ang password gamit ang bcrypt
+# ✅ Hash ang password gamit ang bcrypt
     password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
+
 
     conn = get_db_connection()
     cursor = conn.cursor()
