@@ -1,4 +1,3 @@
-/* General Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -7,7 +6,6 @@ body {
     margin: 0;
 }
 
-/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
@@ -35,15 +33,14 @@ body {
 }
 
 
-/* Container */
 .container.text-center {
-    background: white; /* Panatilihin ang white background */
+    background: white; 
     padding: 40px;
     border-radius: 10px;
     max-width: 550px;
     width: 100%;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Malambot na shadow */
-    border: 1px solid #4CAF50; /* Eleganteng green border */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+    border: 2px dashed #4CAF50; 
 }
 
 /* Instruction Text */
@@ -90,7 +87,6 @@ body {
     
 }
 
-/* Loading Animation */
 .loading {
     display: none;
     font-size: 16px;
@@ -125,6 +121,12 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    overflow: hidden; /* Prevent scrolling within the form */
 }
 
 /* Form styling */
@@ -147,6 +149,23 @@ body {
     background-color: #157347;
 }
 
+p {
+    font-size: 18px;
+}
+
+#user-guide {
+    max-width: 900px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content *//
+}
+
+#about {
+    max-width: 900px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content *//
+} 
+
+
+
+
 /* Responsive Login & Signup Forms */
 @media (max-width: 768px) { /* Tablets & Small Devices */
     #login-form, #signup-form {
@@ -168,7 +187,17 @@ body {
         font-size: 16px;
         padding: 12px;
     }
+
+    .container.text-center {
+        padding: 30px; /* Adjust padding */
+        box-shadow: none; /* Wala nang shadow sa tablets */
+        border: none; /* Wala nang border sa tablets */
+    }
 }
+
+
+
+
 
 @media (max-width: 480px) { /* Mobile Phones */
     #login-form, #signup-form {
@@ -192,5 +221,16 @@ body {
     .btn-success {
         font-size: 14px;
         padding: 10px;
+    }
+
+    .container.text-center {
+        padding: 20px; /* Adjust padding for mobile */
+        box-shadow: none; /* Wala nang shadow sa mobile */
+        border: none; /* Wala nang border sa mobile */
+    }
+
+    img {
+        max-width: 150px; /* Shrinks image for mobile devices */
+        width: 100%; /* Ensure it takes up the full width of the container */
     }
 }

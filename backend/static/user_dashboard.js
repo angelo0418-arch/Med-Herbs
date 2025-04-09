@@ -18,18 +18,6 @@ function fetchUserData() {
         .catch(error => console.error("Error fetching user data:", error));
 }
 
-// 🔹 LOGOUT FUNCTION
-function logout() {
-    fetch("/auth/logout", { method: "POST" })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = "/";
-            } else {
-                alert("Logout failed.");
-            }
-        })
-        .catch(error => console.error("Logout error:", error));
-}
 
 // 🔹 TOGGLE PROFILE VIEW
 function toggleProfile() {
@@ -52,6 +40,9 @@ function showContent(sectionId) {
     if (targetSection) {
         targetSection.scrollIntoView({ behavior: 'smooth' });
     }
+
+    // I-close ang offcanvas pagkatapos mag-click ng link
+    closeOffcanvas();
 }
 
 // 🔹 HANDLE IMAGE UPLOAD
@@ -86,11 +77,11 @@ function handleImageUpload() {
     };
     reader.readAsDataURL(file);
 
-    // Check network status
-    if (!navigator.onLine) {
-        alert('You are offline. Please check your internet connection.');
-        return;
-    }
+    
+    // if (!navigator.onLine) {
+    //     alert('You are offline. Please check your internet connection.');
+    //     return;
+    // }
 
     // Show loading animation
     loading.style.display = 'block';
@@ -137,41 +128,75 @@ function handleImageUpload() {
     }, loadingDuration);
 }
 
-
-// Logout Function (Panatilihin ang dropdown habang naglo-logout)
 function logout(event) {
-    event.stopPropagation(); // Pigilan ang pagsara ng dropdown
+    if (event) {
+        event.stopPropagation(); // Para sa dropdown logout
+    }
 
+    // 🔹 Desktop logout elements
     const logoutBtn = document.getElementById("logoutBtn");
     const logoutSpinner = document.getElementById("logoutSpinner");
 
-    if (!logoutBtn || !logoutSpinner) {
-        console.error("❌ Logout button o spinner hindi natagpuan.");
-        return;
+    // 🔹 Mobile logout elements
+    const logoutBtnMobile = document.getElementById("logoutBtnMobile");
+    const logoutSpinnerMobile = document.getElementById("logoutSpinnerMobile");
+
+    // Disable desktop button and show spinner
+    if (logoutBtn && logoutSpinner) {
+        logoutBtn.style.pointerEvents = "none";
+        logoutSpinner.style.display = "inline-block";
     }
 
-    // I-disable ang logout button at ipakita ang loading spinner
-    logoutBtn.style.pointerEvents = "none";
-    logoutSpinner.style.display = "inline-block";
+    // 🔥 Disable mobile button and show spinner
+    if (logoutBtnMobile && logoutSpinnerMobile) {
+        logoutBtnMobile.style.pointerEvents = "none";
+        logoutSpinnerMobile.style.display = "inline-block";
+    }
 
-    // Magpadala ng logout request
     fetch("/auth/logout", { method: "POST" })
         .then(response => {
             if (response.ok) {
-                // Maghintay ng 2 segundo bago i-redirect sa index.html
                 setTimeout(() => {
                     window.location.href = "/";
                 }, 2000);
             } else {
                 alert("❌ Logout failed. Pakisubukang muli.");
-                logoutBtn.style.pointerEvents = "auto";
-                logoutSpinner.style.display = "none";
+
+                // Re-enable both desktop & mobile logout buttons
+                if (logoutBtn && logoutSpinner) {
+                    logoutBtn.style.pointerEvents = "auto";
+                    logoutSpinner.style.display = "none";
+                }
+                if (logoutBtnMobile && logoutSpinnerMobile) {
+                    logoutBtnMobile.style.pointerEvents = "auto";
+                    logoutSpinnerMobile.style.display = "none";
+                }
             }
         })
         .catch(error => {
             console.error("❌ Logout error:", error);
             alert("❌ May problema sa logout. Pakisubukang muli.");
-            logoutBtn.style.pointerEvents = "auto";
-            logoutSpinner.style.display = "none";
+
+            // Re-enable both desktop & mobile logout buttons
+            if (logoutBtn && logoutSpinner) {
+                logoutBtn.style.pointerEvents = "auto";
+                logoutSpinner.style.display = "none";
+            }
+            if (logoutBtnMobile && logoutSpinnerMobile) {
+                logoutBtnMobile.style.pointerEvents = "auto";
+                logoutSpinnerMobile.style.display = "none";
+            }
         });
+}
+
+
+// 🔹 CLOSE OFFCANVAS
+function closeOffcanvas() {
+    var offcanvasElement = document.getElementById('offcanvasNavbar');
+    if (offcanvasElement) {
+        var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvas) {
+            offcanvas.hide(); // isara yung offcanvas
+        }
+    }
 }

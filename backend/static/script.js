@@ -25,11 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         reader.readAsDataURL(file);
 
-        // Check network status
-        if (!navigator.onLine) {
-            alert('You are offline. Please check your internet connection.');
-            return;
-        }
+        // if (!navigator.onLine) {
+        //     alert('You are offline. Please check your internet connection.');
+        //     return;
+        // }
 
         // Show Loading Animation
         loading.style.display = 'block';
@@ -205,9 +204,28 @@ function showContent(sectionId) {
 
 // ✅ FUNCTION TO CLOSE OFFCANVAS MENU
 function closeOffcanvas() {
-    var offcanvas = document.getElementById('offcanvasNavbar');
-    var bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvas);
-    if (bsOffcanvas) {
-        bsOffcanvas.hide();
+    var offcanvasElement = document.querySelector('.offcanvas.show'); // hanapin yung naka-open
+    if (offcanvasElement) {
+      var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (offcanvas) {
+        offcanvas.hide(); // isara
+      }
     }
 }
+
+
+
+function showContent(contentId) {
+    // Itago lahat ng content sections
+    const contents = document.querySelectorAll('.content, .form-container, .main-wrapper');
+    contents.forEach(content => {
+        content.classList.add('d-none');
+    });
+
+    // Ipakita yung napiling content
+    const targetContent = document.getElementById(contentId);
+    if (targetContent) {
+        targetContent.classList.remove('d-none');
+    }
+}
+

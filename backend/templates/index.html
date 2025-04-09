@@ -23,10 +23,9 @@
         {% endif %}
     {% endwith %}
 </div>
-
     <nav class="navbar navbar-expand-lg bg-success fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand text-white" style="font-size: 30px;" href="#">MedHerbs</a>
+            <a id="medherbsLink" class="navbar-brand text-white" style="font-size: 30px;" href="#" onclick="showContent('main-wrapper')">MedHerbs</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,7 +51,6 @@
                         </button>
                     </div>
 
-
                     <!-- Desktop View: Styled Buttons -->
                     <div class="d-none d-lg-flex gap-2">
                         <button class="btn btn-success rounded-pill px-3 py-2 shadow" onclick="closeOffcanvas(); showContent('login-form')">
@@ -68,16 +66,92 @@
         </div>
     </nav>
     
-    <div id="user-guide" class="content text-center p-5 d-none mt-5">
-        <h2>User Guide</h2> 
-        <p>MedHerbs is a web platform that helps users identify medicinal herbs and learn about their benefits.</p>
+    <div id="user-guide" class="content p-5 d-none mt-5">
+        <h4>How to Use MedHerbs:</h4>
+        <br>
+        <h4>Visit the Homepage</h4>
+        <p>When you open MedHerbs, you will see the homepage where you can upload images of medicinal herbs.</p>
+        <br>
+        <h4>Choose a File to Upload</h4>
+        <p>Click the "Choose File" button to select the image of the medicinal herb you want to upload from your device.</p>
+        <br>
+        <h4>Allowed File Types and Image Size</h4>
+        <p>The image you upload must be in one of the following formats: JPG, JPEG, or PNG. Additionally, the maximum allowed file size for upload is 20MB.</p>        
+        <br>
+        <h4>Allowed Image for Upload</h4>
+        <p>To get the best prediction results, make sure that the image of the medicinal herb is clear and of high quality. The following guidelines will help the system identify the herb more accurately:</p>
+        <br>
+        <ul>
+            <li style="font-size: 18px;">Clear and High Resolution – The image should be of high quality with no blurry parts.</li>
+            <li style="font-size: 18px;">Proper Plant Position – Avoid excessive zooming in or out. The whole plant should be visible and clear.</li>
+            <li style="font-size: 18px;">Proper Lighting – Upload the image taken in a well-lit area with no shadows. Avoid dark images.</li>
+            <li style="font-size: 18px;">No Background Distractions – Avoid images with objects or clutter in the background that may distract the system.</li>
+            <li style="font-size: 18px;">Correct Angle – Upload the image from the front or side of the plant to show its full shape. Avoid images taken from incorrect angles.</li>
+        </ul>
+        <br>
+        <h5>Example of a proper image that can be uploaded</h5>  
+
+        <div class="container">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <img src="{{ url_for('static', filename='moringa.jpg') }}" alt="Sample Herb Image" class="img-fluid rounded" style="max-width: 90%;">
+              </div>
+              <div class="col-md-6 mb-3">
+                <img src="{{ url_for('static', filename='org.jpg') }}" alt="Another Herb Image" class="img-fluid rounded" style="max-width: 90%;">
+              </div>
+            </div>
+          </div>
+          
+        <br>
+        <br>
+        <h4>Upload the Herb Image</h4>
+        <p>After selecting the file, a preview of the image will automatically appear.</p>
+        <br>
+        <h4>Wait While the System Processes the Image</h4>
+        <p>Once the image is uploaded, you will wait for a moment while the system analyzes the image and identifies the herb. The loading animation will indicate that the system is processing the image.</p>
+        <br>
+        <h4>See the Identification Results</h4>
+        <p>After processing, you will see the name of the herb and its benefits.</p>
+        <br>
+        <h4>Upload History</h4>
+        <p>If you are logged in, you can view your upload history. If you don't have an account, you can upload multiple images, but they will not be saved in the system.</p>
     </div>
     
-    <div id="about" class="content text-center p-5 d-none mt-5">
-        <h2>About Us</h2>
-        <p>MedHerbs is dedicated to educating users on herbal medicine and natural remedies.</p>
+    
+    <div id="about" class="content p-5 d-none mt-5">
+        <h4>About Us</h4>
+        <p>The **Traditional Local Medicinal Herb Identification System** is a modern and easy-to-use platform aimed at helping people discover local medicinal herbs and their health benefits. Through advanced image recognition technology, the system provides quick and accurate information to identify herbs with the potential to be used for natural remedies.</p>
+        <br>
+        <h4>Mission</h4>
+        <p>The mission of MedHerbs is to promote the importance of medicinal herbs and their health benefits. We aim to make it easier for people to use natural remedies to improve their health and well-being, and to spread awareness about local medicinal herbs.</p>
+        <br>
+        <h4>How It Works</h4>
+        <p>Our system is easy to use. Simply upload a clear image of a medicinal herb, and the system will conduct an analysis using artificial intelligence to identify the herb's name and benefits. The quick result will provide accurate information and help with the proper use of the herb.</p>
+        <br>
+        <h4>Why It's Important</h4>
+        <p>This system helps spread local knowledge about medicinal herbs and makes it accessible to more people. The role of technology is important in expanding knowledge about natural remedies that can help improve health. At MedHerbs, we value the use of medicinal herbs as an alternative and supportive solution for health.</p>
+        <br>
+        <h4>Join Us</h4>
+        <p>Start your journey of discovering natural health solutions! Upload an image of a medicinal herb and get quick information and its benefits. At MedHerbs, we aim to provide education and assistance to improve the health of everyone.</p>
+        <br>
+        <h4>Values</h4>
+        <ul style="font-size: 18px;">
+            <li>Sustainability: The use of natural and sustainable remedies is a step toward a healthier and more just world.</li>
+            <li>Health & Wellness: Improving health with safe and effective natural remedies.</li>
+            <li>Preservation of Local Knowledge: We value the transmission and dissemination of traditional knowledge about medicinal herbs and their benefits.</li>
+        </ul>
+        <br>
+        <h4>Vision</h4>
+        <p>Our vision is to provide a platform that spreads accurate information and education about medicinal herbs, and we will work together to preserve local traditions and knowledge across the country. Our goal is to make knowledge about natural health solutions accessible to all.</p>
+        <br>
+        <h4>Key Features</h4>
+        <ul style="font-size: 18px;">
+            <li>Fast Herb Identification: Quick and accurate identification of medicinal herbs using state-of-the-art image recognition technology.</li>
+            <li>Comprehensive Herb Benefits: Detailed information about the benefits of each medicinal herb.</li>
+            <li>User-Friendly Interface: An interface that is easy to use for all levels of knowledge.</li>
+            <li>Accessible to All: Users can upload images and learn about medicinal herbs even if they are not registered in the system.</li>
+        </ul>
     </div>
-
 
     <div id="login-form" class="form-container d-none">
         <form class="form-login border shadow rounded p-4" onsubmit="login(event)">
@@ -156,7 +230,6 @@
         <p id="benefit"></p>
     </div>
 </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
