@@ -42,22 +42,45 @@ def predict_image(image_path):
     confidence = np.max(prediction)
 
     if confidence < 0.5:
-        return "Oops! This doesn't seem to be a herb. Please try again with the correct image.", None, original_image
+        return "Oops! This doesn't seem to be a herb. Please try again with the correct image.", None, None, None, original_image
 
     predicted_herb = class_labels.get(predicted_class_index, "Unknown Herb")
+    
+    # Extracting additional data
+    herb_data = class_indices[str(predicted_class_index)]
+   
     herb_benefit = herb_benefits.get(predicted_herb, "No available information.")
-    return predicted_herb, herb_benefit, original_image
+
+    
+    # Adding additional information for the display
+    herb_english_name = herb_data['english_name']
+    herb_tagalog_name = herb_data['tagalog_name']
+    herb_bicol_name = herb_data['bicol_name']
+    herb_description = herb_data['description']
+    
+    return predicted_herb, herb_benefit, herb_english_name, herb_tagalog_name, herb_bicol_name, herb_description, original_image
 
 # 🔹 PROCESS ALL IMAGES
 if __name__ == "__main__":
     for img_file in os.listdir(PREDICT_IMAGES_DIR):
         img_path = os.path.join(PREDICT_IMAGES_DIR, img_file)
-        predicted_herb, herb_benefit, original_image = predict_image(img_path)
+        predicted_herb, herb_benefit, english_name, tagalog_name, bicol_name, description, original_image = predict_image(img_path)
 
         plt.imshow(original_image)
         plt.axis("off")
-        plt.title(f"Predicted: {predicted_herb}\nBenefits: {herb_benefit}")
+        plt.title(f"Predicted: {predicted_herb}\n"
+                  f"English Name: {english_name}\n"
+                  f"Tagalog Name: {tagalog_name}\n"
+                  f"Bicol Name: {bicol_name}\n"
+                  f"Description: {description}\n"
+                  f"Benefits: {herb_benefit}")
         plt.show()
 
-        print(f"\n🌿 **Predicted Herb:** {predicted_herb}")
-        print(f"💡 **Herb Benefits:** {herb_benefit}")
+plt.title(f"Predicted: {predicted_herb}", fontsize=14)
+
+# Maglagay ng text sa ibaba ng image
+plt.figtext(0.01, -0.12, f"English Name: {english_name}", wrap=True, horizontalalignment='left', fontsize=10)
+plt.figtext(0.01, -0.17, f"Tagalog Name: {tagalog_name}", wrap=True, horizontalalignment='left', fontsize=10)
+plt.figtext(0.01, -0.22, f"Bicol Name: {bicol_name}", wrap=True, horizontalalignment='left', fontsize=10)
+plt.figtext(0.01, -0.27, f"Description: {description}", wrap=True, horizontalalignment='left', fontsize=10)
+plt.figtext(0.01, -0.32, f"Benefits: {herb_benefit}", wrap=True, horizontalalignment='left', fontsize=10)

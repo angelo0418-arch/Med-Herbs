@@ -169,10 +169,17 @@ table {
 }
 
 
-#user-guide, #about {
-    max-width: 900px;
-    margin: 0 auto;
+#user-guide {
+    max-width: 900px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content *//
 }
+
+#about {
+    max-width: 900px; /* Limit the width of the content */
+    margin: 0 auto; /* Center the content *//
+} 
+
+
 
 
 

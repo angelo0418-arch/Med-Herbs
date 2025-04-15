@@ -1,42 +1,283 @@
 {
-    "0": "Aloe barbadensis Miller",
-    "1": "Annona muricata",
-    "2": "Antidesma bunius",
-    "3": "Arachis hypogaea",
-    "4": "Averrhoea bilimbi",
-    "5": "Blumea balsamifera",
-    "6": "Capsicum frutescens",
-    "7": "Carmona retusa",
-    "8": "Centella asiatica",
-    "9": "Citrus aurantiifolia",
-    "10": "Citrus maxima",
-    "11": "Citrus microcarpa",
-    "12": "Citrus sinensis",
-    "13": "Coleus scutellarioides",
-    "14": "Corchorus olitorius",
-    "15": "Curcuma longa",
-    "16": "Euphorbia hirta",
-    "17": "Gliricidia sepium",
-    "18": "Hibiscus rosa-sinensis",
-    "19": "Impatiens balsamina",
-    "20": "Ipomoea batatas",
-    "21": "Jatropha curcas",
-    "22": "Lagerstroemia speciosa",
-    "23": "Leucaena leucocephala",
-    "24": "Mangifera indica",
-    "25": "Manihot esculenta",
-    "26": "Mentha cordifolia Opiz",
-    "27": "Momordica charantia",
-    "28": "Moringa oleifera",
-    "29": "Nerium oleander",
-    "30": "Ocimum basilicum",
-    "31": "Origanum vulgare",
-    "32": "Pandanus amaryllifolius",
-    "33": "Pepromia pellucida",
-    "34": "Phyllanthus niruri",
-    "35": "Premna odorata",
-    "36": "Psidium guajava",
-    "37": "Senna alata",
-    "38": "Tamarindus indica",
-    "39": "Vitex negundo"
-}
+    "0": {
+      "scientific_name": "Aloe barbadensis Miller",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "1": {
+      "scientific_name": "Annona muricata",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "2": {
+      "scientific_name": "Antidesma bunius",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "3": {
+      "scientific_name": "Arachis hypogaea",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "4": {
+      "scientific_name": "Averrhoea bilimbi",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "5": {
+      "scientific_name": "Blumea balsamifera",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "6": {
+      "scientific_name": "Capsicum frutescens",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "7": {
+      "scientific_name": "Carmona retusa",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "8": {
+      "scientific_name": "Centella asiatica",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "9": {
+      "scientific_name": "Citrus aurantiifolia",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "10": {
+      "scientific_name": "Citrus maxima",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "11": {
+      "scientific_name": "Citrus microcarpa",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "12": {
+      "scientific_name": "Citrus sinensis",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "13": {
+      "scientific_name": "Coleus scutellarioides",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "14": {
+      "scientific_name": "Corchorus olitorius",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "15": {
+      "scientific_name": "Curcuma longa",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "16": {
+      "scientific_name": "Euphorbia hirta",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "17": {
+      "scientific_name": "Gliricidia sepium",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "18": {
+      "scientific_name": "Hibiscus rosa-sinensis",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "19": {
+      "scientific_name": "Impatiens balsamina",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "20": {
+      "scientific_name": "Ipomoea batatas",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "21": {
+      "scientific_name": "Jatropha curcas",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "22": {
+      "scientific_name": "Lagerstroemia speciosa",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "23": {
+      "scientific_name": "Leucaena leucocephala",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "24": {
+      "scientific_name": "Mangifera indica",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "25": {
+      "scientific_name": "Manihot esculenta",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "26": {
+      "scientific_name": "Mentha cordifolia Opiz",
+      "english_name": "N/A",
+      "tagalog_name": "N/A",
+      "bicol_name": "N/A",
+      "description": "N/A"
+    },
+    "27": {
+      "scientific_name": "Momordica charantia",
+      "english_name": "N/A",
+      "tagalog_name": "Ampalaya",
+      "bicol_name": "Paria",
+      "description": "Used for diabetes management and bitter tonic in traditional medicine."
+    },
+    "28": {
+      "scientific_name": "Moringa oleifera",
+      "english_name": "Moringa",
+      "tagalog_name": "Malunggay",
+      "bicol_name": "Kalamunggay",
+      "description": "Highly nutritious plant rich in vitamins, minerals, and used for treating inflammation and malnutrition."
+    },
+    "29": {
+      "scientific_name": "Nerium oleander",
+      "english_name": "Oleander",
+      "tagalog_name": "Adelfa",
+      "bicol_name": "Adelfa",
+      "description": "Toxic plant often used in ornamental landscaping. Not used for internal medicinal purposes."
+    },
+    "30": {
+      "scientific_name": "Ocimum basilicum",
+      "english_name": "Sweet Basil",
+      "tagalog_name": "Basil",
+      "bicol_name": "Basil",
+      "description": "Used in culinary dishes and for digestive and anti-inflammatory remedies."
+    },
+    "31": {
+      "scientific_name": "Origanum vulgare",
+      "english_name": "Oregano",
+      "tagalog_name": "Oregano",
+      "bicol_name": "Oregano",
+      "description": "Used to treat coughs and colds; popular herbal remedy in Philippine households."
+    },
+    "32": {
+      "scientific_name": "Pandanus amaryllifolius",
+      "english_name": "Pandan",
+      "tagalog_name": "Pandan",
+      "bicol_name": "Pandan",
+      "description": "Commonly used as flavoring and for its calming aroma."
+    },
+    "33": {
+      "scientific_name": "Pepromia pellucida",
+      "english_name": "Shiny Bush",
+      "tagalog_name": "Pansit-pansitan",
+      "bicol_name": "Pansit-pansitan",
+      "description": "Used in treating gout and arthritis. Has analgesic and anti-inflammatory properties."
+    },
+    "34": {
+      "scientific_name": "Phyllanthus niruri",
+      "english_name": "Stonebreaker",
+      "tagalog_name": "Sampa-sampalukan",
+      "bicol_name": "Sampa-sampalukan",
+      "description": "Traditionally used for kidney stones, liver health, and detox."
+    },
+    "35": {
+      "scientific_name": "Premna odorata",
+      "english_name": "Aromatic Premna",
+      "tagalog_name": "Alagaw",
+      "bicol_name": "Alagaw",
+      "description": "Used for coughs, colds, and food preparation (tinola wrapper)."
+    },
+    "36": {
+      "scientific_name": "Psidium guajava",
+      "english_name": "Guava",
+      "tagalog_name": "Bayabas",
+      "bicol_name": "Bayabas",
+      "description": "Leaves used for treating wounds and diarrhea; fruit is rich in Vitamin C."
+    },
+    "37": {
+      "scientific_name": "Senna alata",
+      "english_name": "Ringworm Bush",
+      "tagalog_name": "Akapulko",
+      "bicol_name": "Akapulko",
+      "description": "Antifungal plant used to treat skin infections such as ringworm."
+    },
+    "38": {
+      "scientific_name": "Tamarindus indica",
+      "english_name": "Tamarind",
+      "tagalog_name": "Sampalok",
+      "bicol_name": "Sampalok",
+      "description": "Used for its sour fruit in cooking; also known for digestive and laxative effects."
+    },
+    "39": {
+      "scientific_name": "Vitex negundo",
+      "english_name": "Five-leaved chaste tree",
+      "tagalog_name": "Lagundi",
+      "bicol_name": "Lagundi",
+      "description": "Well-known cough remedy recognized by the Philippine DOH."
+    }
+  }
+  

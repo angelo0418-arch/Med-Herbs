@@ -115,10 +115,35 @@ function handleImageUpload() {
                 prediction.innerHTML = '❌ ' + (data.error || 'Prediction failed. Please try again.');
             } else if (data.warning) {
                 prediction.innerHTML = '⚠️ ' + data.warning;
-            } else {
-                prediction.innerHTML = `🌿 <strong>Herb</strong>: ${data.herb}`;
-                benefit.innerHTML = `💚 <strong>Benefits</strong>: ${data.benefit}`;
+            }else {
+                prediction.innerHTML = `
+            <div style="display: flex; justify-content: center;">
+                <div style="text-align: left; margin-right: 5px; width: 150px;">
+                    <div><strong>🌿 Scientific Name:</strong></div>
+                    <div><strong>🌿 English Name:</strong></div>
+                    <div><strong>🏷️ Tagalog Name:</strong></div>
+                    <div><strong>🏷️ Bicol Name:</strong></div>
+                </div>
+                <div style="text-align: left; margin-right: 5px;">
+                    <div>${data.scientific_name}</div>
+                    <div>${data.english_name}</div>
+                    <div>${data.tagalog_name}</div>
+                    <div>${data.bicol_name}</div>
+                </div>
+            </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    📖 <strong>Description:</strong> ${data.description}
+                </div>
+            `;
+        
+            benefit.innerHTML = `
+                <div style="text-align: center; margin-top: 5px;">
+                    💚 <strong>Benefits:</strong> ${data.benefit}
+                </div>
+            `;
             }
+            
         })
         .catch(error => {
             loading.style.display = 'none';

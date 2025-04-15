@@ -35,7 +35,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 # 🔹 MYSQL CONFIG
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = os.getenv("MYSQL_PASSWORD", "your_fallback_password")  # ✅ Secure database password
+app.config['MYSQL_PASSWORD'] = os.getenv("MYSQL_PASSWORD", "@SorsuBC#404")  # ✅ Secure database password
 app.config['MYSQL_DB'] = 'medherbs_db'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 

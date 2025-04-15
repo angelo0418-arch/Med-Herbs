@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Display uploaded image preview
         const reader = new FileReader();
         reader.onload = function (event) {
             imagePreview.src = event.target.result;
@@ -25,22 +24,14 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         reader.readAsDataURL(file);
 
-        // if (!navigator.onLine) {
-        //     alert('You are offline. Please check your internet connection.');
-        //     return;
-        // }
-
-        // Show Loading Animation
         loading.style.display = 'block';
         prediction.innerHTML = '';
         benefit.innerHTML = '';
 
-        // Adjust loading speed based on network signal
         const connection = navigator.connection || {};
         const effectiveType = connection.effectiveType || '4g';
         const loadingDuration = (effectiveType === '4g' || !effectiveType) ? 1000 : 3000;
 
-        // Prepare FormData for Upload
         const formData = new FormData();
         formData.append('file', file);
 
@@ -57,10 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'Accept': 'application/json' // ✅ Siguraduhin na JSON response ang hinihingi
+                    'Accept': 'application/json'
                 }
             })
-            
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -69,22 +59,39 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(data => {
                 loading.style.display = 'none';
-
                 if (data.warning) {
-                    prediction.innerHTML = data.warning; // Ipakita ang warning message mula sa backend
-                    
+                    prediction.innerHTML = data.warning;
                 } else {
-                    prediction.innerHTML = `🌿 <strong>Herb</strong>: ${data.herb}`;
-                    benefit.innerHTML = `💚 <strong>Benefits</strong>: ${data.benefit}`;
+                    prediction.innerHTML = `
+                        <div style="display: flex; justify-content: center;">
+                            <div style="text-align: left; margin-right: 5px; width: 150px;">
+                                <div><strong>🌿 Scientific Name:</strong></div>
+                                <div><strong>🌿 English Name:</strong></div>
+                                <div><strong>🏷️ Tagalog Name:</strong></div>
+                                <div><strong>🏷️ Bicol Name:</strong></div>
+                            </div>
+                            <div style="text-align: left; margin-right: 5px;">
+                                <div>${data.scientific_name}</div>
+                                <div>${data.english_name}</div>
+                                <div>${data.tagalog_name}</div>
+                                <div>${data.bicol_name}</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 30px;">
+                            📖 <strong>Description:</strong> ${data.description}
+                        </div>
+                    `;
+                    benefit.innerHTML = `
+                        <div style="text-align: center; margin-top: 5px;">
+                            💚 <strong>Benefits:</strong> ${data.benefit}
+                        </div>
+                    `;
                 }
             })
-
             .catch(async (error) => {
                 loading.style.display = 'none';
                 prediction.innerHTML = '❌ Prediction failed. Please check console logs.';
-            
                 console.error("Error fetching prediction:", error);
-            
                 try {
                     const errorData = await error.json();
                     console.error("Backend Error Response:", errorData);
@@ -93,9 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.error("❌ Failed to parse error response.");
                 }
             });
-            
-            
-
         }, loadingDuration);
     }
 
@@ -104,23 +108,18 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!userId) {
         console.warn("⚠️ No user is logged in. Proceeding as guest.");
     }
-    
 
-    // Attach event listener once HTML is fully loaded
     const fileInput = document.getElementById('imageUpload');
     if (fileInput) {
         fileInput.addEventListener('change', handleImageUpload);
         console.log("✅ Event listener added to #imageUpload");
     } else {
-        if (!fileInput) {
-            console.warn("⚠️ Warning: #imageUpload not found. Skipping event listener.");
-            return;
-        }
-        
+        console.warn("⚠️ Warning: #imageUpload not found. Skipping event listener.");
+        return;
     }
 });
 
-// ✅ FIXED LOGIN FUNCTION
+// ✅ LOGIN FUNCTION
 function login(event) {
     event.preventDefault();
 
@@ -135,12 +134,11 @@ function login(event) {
     .then(response => response.json())
     .then(data => {
         alert(data.message);
-
         if (data.status === "success") {
             if (data.role === "admin") {
-                window.location.href = "/admin_dashboard"; // Redirect sa admin dashboard
+                window.location.href = "/admin_dashboard";
             } else {
-                window.location.href = "/user_dashboard"; // Redirect sa user dashboard
+                window.location.href = "/user_dashboard";
             }
         }
     })
@@ -148,10 +146,10 @@ function login(event) {
         console.error("Login Error:", error);
     });
 
-    closeOffcanvas(); // Close menu after login
+    closeOffcanvas();
 }
 
-// ✅ FIXED SIGNUP FUNCTION
+// ✅ SIGNUP FUNCTION
 function signup(event) {
     event.preventDefault();
 
@@ -175,7 +173,7 @@ function signup(event) {
             alert("Signup failed: " + data.error);
         } else {
             alert("Signup successful! Redirecting to login...");
-            window.location.href = "/"; // ✅ Redirect to login page
+            window.location.href = "/";
         }
     })  
     .catch(error => {
@@ -183,12 +181,10 @@ function signup(event) {
         alert("Something went wrong. Please try again.");
     });
 
-    closeOffcanvas(); // Close menu after signup
+    closeOffcanvas();
 }
 
-
-
-// ✅ FUNCTION TO SHOW CONTENT
+// ✅ SHOW CONTENT FUNCTION (Only this one remains)
 function showContent(sectionId) {
     document.querySelectorAll('.content, .main-wrapper, .form-container').forEach(section => {
         section.classList.add('d-none');
@@ -202,30 +198,13 @@ function showContent(sectionId) {
     document.body.style.overflow = (sectionId === 'login-form' || sectionId === 'signup-form') ? 'hidden' : 'auto';
 }
 
-// ✅ FUNCTION TO CLOSE OFFCANVAS MENU
+// ✅ CLOSE OFFCANVAS MENU
 function closeOffcanvas() {
-    var offcanvasElement = document.querySelector('.offcanvas.show'); // hanapin yung naka-open
+    var offcanvasElement = document.querySelector('.offcanvas.show');
     if (offcanvasElement) {
-      var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-      if (offcanvas) {
-        offcanvas.hide(); // isara
-      }
+        var offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvas) {
+            offcanvas.hide();
+        }
     }
 }
-
-
-
-function showContent(contentId) {
-    // Itago lahat ng content sections
-    const contents = document.querySelectorAll('.content, .form-container, .main-wrapper');
-    contents.forEach(content => {
-        content.classList.add('d-none');
-    });
-
-    // Ipakita yung napiling content
-    const targetContent = document.getElementById(contentId);
-    if (targetContent) {
-        targetContent.classList.remove('d-none');
-    }
-}
-
