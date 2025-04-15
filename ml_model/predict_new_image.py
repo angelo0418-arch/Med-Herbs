@@ -1,8 +1,6 @@
 import os
 import numpy as np
 import json
-import re
-import cv2
 import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -15,72 +13,89 @@ HERB_BENEFITS_FILE = os.path.join(MODEL_DIR, "herb_benefits.json")
 PREDICT_IMAGES_DIR = os.path.abspath(os.path.join(MODEL_DIR, "..", "predict_images"))
 
 # 🔹 LOAD MODEL
-model = load_model(MODEL_FILE)
-print("✅ Model successfully loaded.")
+try:
+    model = load_model(MODEL_FILE)
+    print("✅ Model successfully loaded.")
+except Exception as e:
+    print(f"❌ Failed to load model: {e}")
+    exit(1)
 
 # 🔹 LOAD CLASS INDICES & HERB BENEFITS
-with open(CLASS_INDICES_FILE, 'r') as f:
-    class_indices = json.load(f)
-class_labels = {int(k): v for k, v in class_indices.items()}
+try:
+    with open(CLASS_INDICES_FILE, 'r') as f:
+        class_indices = json.load(f)
+        scientific_name_map = {int(k): v['scientific_name'] for k, v in class_indices.items()}
 
-with open(HERB_BENEFITS_FILE, 'r') as f:
-    herb_benefits = json.load(f)
+    with open(HERB_BENEFITS_FILE, 'r') as f:
+        herb_benefits = json.load(f)
+
+    print("✅ JSON files loaded successfully.")
+except Exception as e:
+    print(f"❌ Error loading JSON files: {e}")
+    exit(1)
 
 # 🔹 IMAGE PREPROCESSING
 def load_and_prepare_image(img_path):
-    img = image.load_img(img_path, target_size=(224, 224))
-    img_array = image.img_to_array(img) / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
-    return img_array, img
+    try:
+        img = image.load_img(img_path, target_size=(224, 224))
+        img_array = image.img_to_array(img) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
+        return img_array, img
+    except Exception as e:
+        print(f"❌ Error processing image {img_path}: {e}")
+        return None, None
 
 # 🔹 PREDICTION FUNCTION
 def predict_image(image_path):
     processed_image, original_image = load_and_prepare_image(image_path)
-    prediction = model.predict(processed_image)
+    if processed_image is None:
+        return "Invalid image file.", None, None, None, None, None, None
 
-    predicted_class_index = np.argmax(prediction)
-    confidence = np.max(prediction)
+    prediction = model.predict(processed_image)
+    predicted_class_index = int(np.argmax(prediction))
+    confidence = float(np.max(prediction))
 
     if confidence < 0.5:
-        return "Oops! This doesn't seem to be a herb. Please try again with the correct image.", None, None, None, original_image
+        return "Oops! This doesn't seem to be a herb. Please try again with the correct image.", None, None, None, None, None, original_image
 
-    predicted_herb = class_labels.get(predicted_class_index, "Unknown Herb")
-    
-    # Extracting additional data
-    herb_data = class_indices[str(predicted_class_index)]
-   
-    herb_benefit = herb_benefits.get(predicted_herb, "No available information.")
+    predicted_herb = scientific_name_map.get(predicted_class_index, "Unknown Herb")
+    herb_data = class_indices.get(str(predicted_class_index), {})
 
-    
-    # Adding additional information for the display
-    herb_english_name = herb_data['english_name']
-    herb_tagalog_name = herb_data['tagalog_name']
-    herb_bicol_name = herb_data['bicol_name']
-    herb_description = herb_data['description']
-    
-    return predicted_herb, herb_benefit, herb_english_name, herb_tagalog_name, herb_bicol_name, herb_description, original_image
+    return (
+        predicted_herb,
+        herb_benefits.get(predicted_herb, "No available information."),
+        herb_data.get("english_name", "N/A"),
+        herb_data.get("tagalog_name", "N/A"),
+        herb_data.get("bicol_name", "N/A"),
+        herb_data.get("description", "No description."),
+        original_image
+    )
 
-# 🔹 PROCESS ALL IMAGES
+# 🔹 PROCESS IMAGES IN FOLDER
 if __name__ == "__main__":
     for img_file in os.listdir(PREDICT_IMAGES_DIR):
         img_path = os.path.join(PREDICT_IMAGES_DIR, img_file)
-        predicted_herb, herb_benefit, english_name, tagalog_name, bicol_name, description, original_image = predict_image(img_path)
+        print(f"\n📷 Processing {img_file}...")
+
+        result = predict_image(img_path)
+
+        if result[1] is None:
+            print(f"⚠️ Skipped: {result[0]}")
+            continue
+
+        predicted_herb, benefit, english, tagalog, bicol, description, original_image = result
+
+        print(f"✅ Prediction: {predicted_herb}")
+        print(f"📌 English: {english} | Tagalog: {tagalog} | Bicol: {bicol}")
+        print(f"📋 Description: {description}")
+        print(f"🌿 Benefits: {benefit}")
 
         plt.imshow(original_image)
         plt.axis("off")
-        plt.title(f"Predicted: {predicted_herb}\n"
-                  f"English Name: {english_name}\n"
-                  f"Tagalog Name: {tagalog_name}\n"
-                  f"Bicol Name: {bicol_name}\n"
-                  f"Description: {description}\n"
-                  f"Benefits: {herb_benefit}")
+        plt.title(f"Predicted: {predicted_herb}", fontsize=14)
+        plt.figtext(0.01, -0.12, f"English Name: {english}", wrap=True, fontsize=10)
+        plt.figtext(0.01, -0.17, f"Tagalog Name: {tagalog}", wrap=True, fontsize=10)
+        plt.figtext(0.01, -0.22, f"Bicol Name: {bicol}", wrap=True, fontsize=10)
+        plt.figtext(0.01, -0.27, f"Description: {description}", wrap=True, fontsize=10)
+        plt.figtext(0.01, -0.32, f"Benefits: {benefit}", wrap=True, fontsize=10)
         plt.show()
-
-plt.title(f"Predicted: {predicted_herb}", fontsize=14)
-
-# Maglagay ng text sa ibaba ng image
-plt.figtext(0.01, -0.12, f"English Name: {english_name}", wrap=True, horizontalalignment='left', fontsize=10)
-plt.figtext(0.01, -0.17, f"Tagalog Name: {tagalog_name}", wrap=True, horizontalalignment='left', fontsize=10)
-plt.figtext(0.01, -0.22, f"Bicol Name: {bicol_name}", wrap=True, horizontalalignment='left', fontsize=10)
-plt.figtext(0.01, -0.27, f"Description: {description}", wrap=True, horizontalalignment='left', fontsize=10)
-plt.figtext(0.01, -0.32, f"Benefits: {herb_benefit}", wrap=True, horizontalalignment='left', fontsize=10)

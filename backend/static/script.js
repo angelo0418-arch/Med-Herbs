@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Get the userId from sessionStorage or localStorage
+    const rawUserId = sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
+    const userId = rawUserId && !isNaN(parseInt(rawUserId)) ? parseInt(rawUserId) : null;
+
+    // Function to handle image upload
     function handleImageUpload() {
         const fileInput = document.getElementById('imageUpload');
         const file = fileInput?.files[0]; 
@@ -35,10 +40,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData();
         formData.append('file', file);
 
-        if (typeof userId !== "undefined" && userId !== null) {
+        // If user is logged in and user_id is a valid number, append it
+        if (userId !== null) {
             formData.append("user_id", userId);
+            console.log("📌 Logged-in user ID:", userId);
+        } else {
+            // If not logged in, generate or get guest_id from localStorage
+            let guestId = localStorage.getItem("guest_id");
+            if (!guestId) {
+                guestId = 'guest_' + Date.now();
+                localStorage.setItem("guest_id", guestId);
+            }
+            formData.append("guest_id", guestId);
+            console.log("📌 Guest ID:", guestId);
         }
-        
+
         console.log("📌 Sending image to /predict/"); 
         console.log("📌 File selected:", file.name);
         console.log("📌 File type:", file.type);
@@ -103,12 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, loadingDuration);
     }
 
-    const userId = sessionStorage.getItem("user_id") || localStorage.getItem("user_id");
-
-    if (!userId) {
-        console.warn("⚠️ No user is logged in. Proceeding as guest.");
-    }
-
+    // Add event listener for image upload
     const fileInput = document.getElementById('imageUpload');
     if (fileInput) {
         fileInput.addEventListener('change', handleImageUpload);
@@ -135,6 +146,8 @@ function login(event) {
     .then(data => {
         alert(data.message);
         if (data.status === "success") {
+            sessionStorage.setItem("user_id", data.user_id);
+
             if (data.role === "admin") {
                 window.location.href = "/admin_dashboard";
             } else {
@@ -184,7 +197,7 @@ function signup(event) {
     closeOffcanvas();
 }
 
-// ✅ SHOW CONTENT FUNCTION (Only this one remains)
+// ✅ SHOW CONTENT FUNCTION
 function showContent(sectionId) {
     document.querySelectorAll('.content, .main-wrapper, .form-container').forEach(section => {
         section.classList.add('d-none');

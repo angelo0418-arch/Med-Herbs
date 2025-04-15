@@ -1,4 +1,6 @@
 import os
+import time
+from datetime import datetime
 from flask import Blueprint, request, jsonify
 from werkzeug.utils import secure_filename
 from db_config import get_db_connection
@@ -34,57 +36,52 @@ def upload_file():
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         file.save(file_path)
 
-        # ✅ Kunin ang `user_id`
-        try:
-            user_id = request.form.get("user_id")
-            
-            if not user_id or not user_id.isdigit():
-                return jsonify({"error": "Invalid User ID"}), 400
-            
-            user_id = int(user_id)  # Convert to integer
+        # ✅ Kunin ang `user_id` o `guest_id`
+        user_id = request.form.get("user_id")
+        guest_id = request.form.get("guest_id")
 
-            # ✅ I-check kung ang user ay umiiral sa `users` table bago mag-insert
+        # ❌ Error kung sabay silang meron
+        if user_id and guest_id:
+            return jsonify({"error": "Only one of user_id or guest_id should be provided, not both."}), 400
+
+        if user_id:
+            if not user_id.isdigit():
+                return jsonify({"error": "Invalid User ID"}), 400
+            user_id = int(user_id)
+
+            # ✅ I-check kung umiiral ang user
             conn = get_db_connection()
             cursor = conn.cursor()
             cursor.execute("SELECT id FROM users WHERE id = %s", (user_id,))
             existing_user = cursor.fetchone()
-            
-            if not existing_user:
-                return jsonify({"error": "Invalid User ID. User does not exist."}), 400
-        
-        except ValueError:
-            return jsonify({"error": "Invalid User ID"}), 400
-        
-        finally:
             cursor.close()
             conn.close()
 
-        # ✅ Predict herb automatically
-        predicted_herb, benefit = predict_image(file_path)
+            if not existing_user:
+                return jsonify({"error": "Invalid User ID. User does not exist."}), 400
 
-        # 🔹 LOGGING PARA SA DEBUGGING
-        print(f"📸 File Path: {file_path}")
-        print(f"🧑‍💻 User ID: {user_id}")
-        print(f"🌿 Predicted Herb: {predicted_herb}")
+        elif guest_id:
+            guest_id = guest_id.strip()  # linisin kung may extra spaces
+            if guest_id == "":
+                return jsonify({"error": "Guest ID cannot be empty"}), 400
+
+        else:
+            # Auto-generate guest_id gamit ang timestamp kapag wala silang ipinasang guest_id
+            guest_id = "guest_" + datetime.now().strftime("%Y%m%d%H%M%S")
+        
+        # ✅ Predict herb automatically
+        scientific_name, english_name, tagalog_name, bicol_name, description, benefit = predict_image(file_path)
+        predicted_herb = scientific_name  # 🔁 clarity lang
 
         # ✅ Save to database
         conn = get_db_connection()
         cursor = conn.cursor()
 
         try:
-            # I-check muna kung may existing user_id sa users table
-            cursor.execute("SELECT id FROM users WHERE id = %s", (user_id,))
-            existing_user = cursor.fetchone()
-
-            if not existing_user:
-                return jsonify({"error": "User does not exist in the database."}), 400
-
-            # Kapag valid, saka lang mag-insert
             cursor.execute(
-                "INSERT INTO uploads (user_id, image_path, predicted_herb) VALUES (%s, %s, %s)",
-                (user_id, file_path, herb)
+                "INSERT INTO uploads (user_id, guest_id, image_path, identified_herb, herb_benefit) VALUES (%s, %s, %s, %s, %s)",
+                (user_id if user_id else None, guest_id if guest_id else None, file_path, predicted_herb, benefit)
             )
-
             conn.commit()
 
             cursor.execute("SELECT LAST_INSERT_ID()")
@@ -92,7 +89,7 @@ def upload_file():
 
         except Exception as e:
             return jsonify({"message": "Database error", "error": str(e)}), 500
-        
+
         finally:
             cursor.close()
             conn.close()
