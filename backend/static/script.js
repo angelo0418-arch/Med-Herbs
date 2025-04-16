@@ -79,29 +79,31 @@ document.addEventListener("DOMContentLoaded", function () {
                     prediction.innerHTML = data.warning;
                 } else {
                     prediction.innerHTML = `
-                        <div style="display: flex; justify-content: center;">
-                            <div style="text-align: left; margin-right: 5px; width: 150px;">
-                                <div><strong>🌿 Scientific Name:</strong></div>
-                                <div><strong>🌿 English Name:</strong></div>
-                                <div><strong>🏷️ Tagalog Name:</strong></div>
-                                <div><strong>🏷️ Bicol Name:</strong></div>
-                            </div>
-                            <div style="text-align: left; margin-right: 5px;">
-                                <div>${data.scientific_name}</div>
-                                <div>${data.english_name}</div>
-                                <div>${data.tagalog_name}</div>
-                                <div>${data.bicol_name}</div>
-                            </div>
+                    <div style="display: flex; justify-content: center;">
+                        <div style="text-align: left; margin-right: 5px; width: 150px;">
+                            <div><strong>🌿 Scientific Name:</strong></div>
+                            <div><strong>🌿 English Name:</strong></div>
+                            <div><strong>🏷️ Tagalog Name:</strong></div>
+                            <div><strong>🏷️ Bicol Name:</strong></div>
                         </div>
-                        <div style="text-align: center; margin-top: 30px;">
-                            📖 <strong>Description:</strong> ${data.description}
+                        <div style="text-align: left; margin-right: 5px;">
+                            <div>${data.scientific_name}</div>
+                            <div>${data.english_name}</div>
+                            <div>${data.tagalog_name}</div>
+                            <div>${data.bicol_name}</div>
                         </div>
-                    `;
-                    benefit.innerHTML = `
-                        <div style="text-align: center; margin-top: 5px;">
-                            💚 <strong>Benefits:</strong> ${data.benefit}
-                        </div>
-                    `;
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                        📖 <strong>Description:</strong> ${data.description}
+                    </div>
+                `;
+                
+                benefit.innerHTML = `
+                    <div style="text-align: center; margin-top: 5px;">
+                        💚 <strong>Benefits:</strong> ${data.benefit}
+                    </div>
+                `;
+                
                 }
             })
             .catch(async (error) => {

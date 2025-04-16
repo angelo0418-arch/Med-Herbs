@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 import tensorflow as tf
 from db_config import get_db_connection  # ✅ Import MySQL connection
+from flask import session 
 
 # 🔹 CONFIGURATION
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -98,7 +99,7 @@ def predict_image_route():
         return jsonify({'warning': benefit}), 200
 
     # Save to database if user is logged in
-    user_id = request.form.get("user_id")
+    user_id = session.get("user_id")
     guest_id = request.form.get("guest_id")
 
     conn = get_db_connection()
