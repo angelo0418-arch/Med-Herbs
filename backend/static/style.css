@@ -154,20 +154,22 @@ p {
 }
 
 #user-guide {
-    max-width: 900px; /* Limit the width of the content */
-    margin: 0 auto; /* Center the content *//
+    max-width: 900px; 
+    margin: 0 auto; 
 }
 
 #about {
-    max-width: 900px; /* Limit the width of the content */
-    margin: 0 auto; /* Center the content *//
+    max-width: 900px; 
+    margin: 0 auto;
 } 
 
 
 
 
-/* Responsive Login & Signup Forms */
-@media (max-width: 768px) { /* Tablets & Small Devices */
+/* ------------------- Responsive Styles ------------------- */
+
+/* Tablet View */
+@media (max-width: 768px) { 
     #login-form, #signup-form {
         width: 95%;
         max-width: 350px;
@@ -189,17 +191,15 @@ p {
     }
 
     .container.text-center {
-        padding: 30px; /* Adjust padding */
-        box-shadow: none; /* Wala nang shadow sa tablets */
-        border: none; /* Wala nang border sa tablets */
+        padding: 30px; 
+        box-shadow: none; 
+        border: none;
     }
 }
 
 
-
-
-
-@media (max-width: 480px) { /* Mobile Phones */
+/* Mobile View */
+@media (max-width: 480px) { 
     #login-form, #signup-form {
         width: 100%;
         padding: 10px;
@@ -209,8 +209,8 @@ p {
         padding: 15px;
         box-shadow: none;
         border-radius: 10px;
-        max-height: 90vh; /* Adjust height for mobile */
-        overflow-y: auto; /* Enable scrolling if needed */
+        max-height: 90vh; 
+        overflow-y: auto; 
     }
 
     .form-control {
@@ -224,13 +224,92 @@ p {
     }
 
     .container.text-center {
-        padding: 20px; /* Adjust padding for mobile */
-        box-shadow: none; /* Wala nang shadow sa mobile */
-        border: none; /* Wala nang border sa mobile */
+        padding: 20px; 
+        box-shadow: none; 
+        border: none; 
     }
 
     img {
-        max-width: 150px; /* Shrinks image for mobile devices */
-        width: 100%; /* Ensure it takes up the full width of the container */
+        max-width: 150px;
+        width: 100%; 
+    }
+}
+
+
+
+
+/* ------------------- prediction style and responsive ------------------- */
+.herb-details {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.herb-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.herb-label {
+    font-weight: bold;
+    color: #2d6a4f;
+    width: 200px;
+}
+
+.herb-value {
+    color: #333;
+    flex: 1;
+}
+
+.herb-description,
+.herb-benefit {
+    max-width: 700px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.herb-description strong,
+.herb-benefit strong {
+    color: #2d6a4f;
+}
+
+
+/* Tablet View */
+@media (max-width: 768px) {
+    .herb-item {
+        flex-direction: row; 
+    }
+
+    .herb-label {
+        width: 150px; 
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .herb-item {
+        flex-direction: column; 
+    }
+
+    .herb-label {
+        width: 100%; 
+        margin-bottom: 5px;
+    }
+
+    .herb-value {
+        width: 100%; 
+    }
+
+    .herb-description,
+    .herb-benefit {
+        font-size: 14px;
+        margin: 15px auto;
+        color: #333;
     }
 }

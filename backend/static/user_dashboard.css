@@ -170,13 +170,13 @@ table {
 
 
 #user-guide {
-    max-width: 900px; /* Limit the width of the content */
-    margin: 0 auto; /* Center the content *//
+    max-width: 900px; 
+    margin: 0 auto; 
 }
 
 #about {
-    max-width: 900px; /* Limit the width of the content */
-    margin: 0 auto; /* Center the content *//
+    max-width: 900px; 
+    margin: 0 auto; 
 } 
 
 
@@ -184,7 +184,7 @@ table {
 
 
 
-/* ------------------- Responsive Styles ------------------- */
+/* -------------------  Container Responsive Styles ------------------- */
 
 @media (max-width: 768px) {
     .container.text-center {
@@ -204,5 +204,83 @@ table {
     img {
         max-width: 150px;
         width: 100%;
+    }
+}
+
+
+
+/* ------------------- prediction style and responsive ------------------- */
+.herb-details {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.herb-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.herb-label {
+    font-weight: bold;
+    color: #2d6a4f;
+    width: 200px;
+}
+
+.herb-value {
+    color: #333;
+    flex: 1;
+}
+
+.herb-description,
+.herb-benefit {
+    max-width: 700px;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.herb-description strong,
+.herb-benefit strong {
+    color: #2d6a4f;
+}
+
+
+/* Tablet View */
+@media (max-width: 768px) {
+    .herb-item {
+        flex-direction: row; 
+    }
+
+    .herb-label {
+        width: 150px; 
+    }
+}
+
+/* Mobile View */
+@media (max-width: 480px) {
+    .herb-item {
+        flex-direction: column; 
+    }
+
+    .herb-label {
+        width: 100%; 
+        margin-bottom: 5px;
+    }
+
+    .herb-value {
+        width: 100%; 
+    }
+
+    .herb-description,
+    .herb-benefit {
+        font-size: 14px;
+        margin: 15px auto;
+        color: #333;
     }
 }

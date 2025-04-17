@@ -123,30 +123,35 @@ function handleImageUpload() {
                 prediction.innerHTML = '⚠️ ' + data.warning;
             }else {
                 prediction.innerHTML = `
-                <div style="display: flex; justify-content: center;">
-                    <div style="text-align: left; margin-right: 5px; width: 150px;">
-                        <div><strong>🌿 Scientific Name:</strong></div>
-                        <div><strong>🌿 English Name:</strong></div>
-                        <div><strong>🏷️ Tagalog Name:</strong></div>
-                        <div><strong>🏷️ Bicol Name:</strong></div>
+                <div class="herb-details">
+                    <div class="herb-item">
+                        <div class="herb-label">🌿 Scientific Name:</div>
+                        <div class="herb-value">${data.scientific_name}</div>
                     </div>
-                    <div style="text-align: left; margin-right: 5px;">
-                        <div>${data.scientific_name}</div>
-                        <div>${data.english_name}</div>
-                        <div>${data.tagalog_name}</div>
-                        <div>${data.bicol_name}</div>
+                    <div class="herb-item">
+                        <div class="herb-label">🌿 English Name:</div>
+                        <div class="herb-value">${data.english_name}</div>
+                    </div>
+                    <div class="herb-item">
+                        <div class="herb-label">🌿 Tagalog Name:</div>
+                        <div class="herb-value">${data.tagalog_name}</div>
+                    </div>
+                    <div class="herb-item">
+                        <div class="herb-label">🌿 Bicol Name:</div>
+                        <div class="herb-value">${data.bicol_name}</div>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 30px;">
+            
+                <div class="herb-description">
                     📖 <strong>Description:</strong> ${data.description}
                 </div>
             `;
             
             benefit.innerHTML = `
-                <div style="text-align: center; margin-top: 5px;">
+                <div class="herb-benefit">
                     💚 <strong>Benefits:</strong> ${data.benefit}
                 </div>
-            `;            
+            `;                    
             }
             
         })
