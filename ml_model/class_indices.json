@@ -2,282 +2,282 @@
       "0": {
         "scientific_name": "Aloe barbadensis Miller",
         "english_name": "Aloe Vera",
-        "tagalog_name": "Aloe",
-        "bicol_name": "Aloe",
-        "description": "Known for its healing properties, used to treat burns, wounds, and skin irritation. Also has digestive benefits."
+        "tagalog_name": "Sabila",
+        "bicol_name": "Dilang-buwaya",
+        "description": "This large Aloe vera plant boasts fleshy lance-shaped grey-green leaves with small white teeth along the edges growing out from a starfish-like basal rosette. The spiky aloe vera flowers burst into bloom in vibrant shades of yellow, red, or orange at the tips of their stalks, when given favorable conditions."
       },
       "1": {
         "scientific_name": "Annona muricata",
         "english_name": "Soursop",
         "tagalog_name": "Guyabano ",
         "bicol_name": "Guyabano ",
-        "description": "Fruit used for its anticancer and anti-inflammatory properties, as well as for treating digestive issues."
+        "description": "A small tropical fruit tree with a heart-shaped fruit, a green spiny exterior, and sweet, pulpy, white flesh. The fruit is known for its unique flavor, which is a combination of strawberries and apple with sour citrus notes, along with a creamy texture reminiscent of banana."
       },
       "2": {
         "scientific_name": "Antidesma bunius",
-        "english_name": "Bignay",
+        "english_name": "wild cherry",
         "tagalog_name": "Bignay",
         "bicol_name": "Bignay",
-        "description": "Berries are used to treat high blood pressure, improve digestion, and have antioxidant properties."
+        "description": "Bignay is a medium-sized tree, typically 3-10 meters tall, with shiny, oval-shaped leaves. It has small, green flowers and bears clusters of small, red or black, edible berries. The fruits are known to be sour when unripe and tart and sweet when ripe. Bignay is a dioecious tree, meaning male and female flowers are on separate plants."
       },
       "3": {
         "scientific_name": "Arachis hypogaea",
         "english_name": "Peanut",
         "tagalog_name": "Mani",
         "bicol_name": "Mani",
-        "description": "Used as a source of protein and healthy fats; also used to treat heart disease and improve skin health."
+        "description": "Arachis hypogaea is a legume crop in the family Fabaceae. It's known for its edible seeds, which are the peanuts.The pods develop underground, which is unusual for legumes. It's a widely cultivated crop, both for food and oil production. It's also a source of nitrogen-fixing bacteria, enriching the soil."
       },
       "4": {
         "scientific_name": "Averrhoea bilimbi",
-        "english_name": "N/A",
+        "english_name": "Cucumber tree",
         "tagalog_name": "Kamias",
         "bicol_name": "Iba",
-        "description": "Used to treat high blood pressure, skin conditions, and as a souring agent in cooking."
+        "description": "A tropical tree with small, green, cucumber-shaped fruits that have a sour taste. It's used in cooking and has some medicinal properties."
       },
       "5": {
         "scientific_name": "Blumea balsamifera",
-        "english_name": "Sambong",
+        "english_name": "Ngai camphor",
         "tagalog_name": "Sambong",
         "bicol_name": "Lakad bulan",
-        "description": "Used for its anti-inflammatory and pain-relieving properties, commonly for treating muscle pain."
+        "description": "Is a strongly aromatic shrub or small tree native to Southeast Asia and the Philippines. It's part of the Asteraceae family and is recognized for its medicinal properties and use in traditional medicine. The plant is characterized by simple, alternate leaves, a softly hairy stem, and loose yellow flower heads."
       },
       "6": {
         "scientific_name": "Capsicum frutescens",
-        "english_name": "Tabasco pepper",
+        "english_name": "Wild Chili",
         "tagalog_name": "Siling labuyo",
-        "bicol_name": "Siling labuyo",
-        "description": "Used to treat pain and inflammation, and as a natural remedy for digestive issues."
+        "bicol_name": "Pasitis",
+        "description": "It is a small chili pepper variety, also called wild chili or Cayenne pepper in English. It is a perennial plant with small, tapered fruits that are typically red, but can also be yellow, purple, or black."
       },
       "7": {
         "scientific_name": "Carmona retusa",
-        "english_name": "Fukien tea plant",
-        "tagalog_name": "Fuku",
-        "bicol_name": "Fuku",
-        "description": "Traditionally used for treating wounds and as a diuretic."
+        "english_name": "Fukien tea tree",
+        "tagalog_name": "Tsaang Gubat",
+        "bicol_name": "Putputai",
+        "description": "Carmona retusa is a shrub or small tree, typically growing up to 4 meters tall, with small white flowers and small drupe fruits. It has a well-branched growth habit and is deciduous. The leaves are small, obovate to oblong-obovate, and can be toothed or lobed near the apex."
       },
       "8": {
         "scientific_name": "Centella asiatica",
-        "english_name": "Gotu kola",
-        "tagalog_name": "Suro-suro",
-        "bicol_name": "Tayum",
-        "description": "Tayum"
+        "english_name": "Indian pennywort",
+        "tagalog_name": "takip-kohol",
+        "bicol_name": "Suro-Suro",
+        "description": "It's a small, creeping herb with a medicinal history, used in traditional medicine for its potential brain tonic, anxiolytic, and anti-aging properties."
       },
       "9": {
         "scientific_name": "Citrus aurantiifolia",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Key lime",
+        "tagalog_name": "Dayap",
+        "bicol_name": "Tambulilid",
+        "description": "Is a small, evergreen tree or shrub, typically reaching 5 meters (16 feet) in height. It is known for its spiny branches and glossy, elliptical to oblong-ovate leaves with crenulate margins."
       },
       "10": {
         "scientific_name": "Citrus maxima",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Shaddock",
+        "tagalog_name": "Pomelo",
+        "bicol_name": "Lukban",
+        "description": "Also known as a pomelo or shaddock, is the largest citrus fruit, originating in Southeast Asia and believed to be the ancestor of the grapefruit."
       },
       "11": {
         "scientific_name": "Citrus microcarpa",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Philippine lime",
+        "tagalog_name": "Calamansi",
+        "bicol_name": "Suwa",
+        "description": "A small, round citrus fruit, about 2-4 cm in diameter, with a tangy and sour taste, similar to a combination of lime and orange."
       },
       "12": {
         "scientific_name": "Citrus sinensis",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Orange",
+        "tagalog_name": "Dalanghita",
+        "bicol_name": "Sangkis",
+        "description": "Sweet oranges are known for their sweet, juicy, and slightly acidic flavor. They are round to slightly oval in shape, with a peel that can range from light orange to deep orange. The flesh is segmented, with each segment containing many small vesicles filled with juice."
       },
       "13": {
         "scientific_name": "Coleus scutellarioides",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Painted nettle",
+        "tagalog_name": "Mayana",
+        "bicol_name": "Miana",
+        "description": "Also known as coleus, is a popular flowering plant in the family Lamiaceae. It's commonly called painted nettle and is known for its highly decorative, variegated leaves."
       },
       "14": {
         "scientific_name": "Corchorus olitorius",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Jute mallow",
+        "tagalog_name": "Saluyot",
+        "bicol_name": "Saluyot",
+        "description": "Commonly known as jute mallow or Jew's mallow, is a leafy green vegetable and fiber crop. "
       },
       "15": {
         "scientific_name": "Curcuma longa",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Turmeric",
+        "tagalog_name": "Luyang- Dilaw",
+        "bicol_name": " Luyang- Dilaw",
+        "description": "Curcuma longa is a rhizomatous herb with bright yellow rhizomes, which are used in culinary and medicinal practices."
       },
       "16": {
         "scientific_name": "Euphorbia hirta",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Asthma Plant",
+        "tagalog_name": "Tawa tawa",
+        "bicol_name": "Tawa tawa",
+        "description": "Euphorbia hirta is a hairy, prostrate herb that grows in open grasslands and along roadsides. It has red, round stems lined with long, white hairs and oblong, paired green leaves that may turn red in nutrient-poor soils."
       },
       "17": {
         "scientific_name": "Gliricidia sepium",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Gliricidia/Mexican Lilac",
+        "tagalog_name": "Madre Cacao/Madre de Kakaw",
+        "bicol_name": "Apatot",
+        "description": "Gliricidia sepium is a medium-sized tree in the Fabaceae (legume) family, native to Central and South America but now cultivated in many tropical regions. It's known for its fast growth, nitrogen-fixing properties, and ability to produce various products and services, making it a popular multipurpose tree."
       },
       "18": {
         "scientific_name": "Hibiscus rosa-sinensis",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "China Rose/Hibiscus",
+        "tagalog_name": "Gumamela",
+        "bicol_name": "Antulanga",
+        "description": "Commonly known as Chinese hibiscus or China rose, is a tropical flowering plant. In the Philippines, It's a bushy shrub or small tree with glossy leaves and large, trumpet-shaped flowers that come in various colors."
       },
       "19": {
         "scientific_name": "Impatiens balsamina",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Garden Balsam",
+        "tagalog_name": "Kamantigi",
+        "bicol_name": "Balsam",
+        "description": "Impatiens balsamina is a vibrant, annual herb with a height of up to 1 meter (3.3 feet). It has erect, succulent stems, and its leaves are elliptical to lance-shaped with serrated margins. The most striking feature is its showy, cup-shaped flowers, which come in a variety of colors like pink, red, purple, and white, sometimes even bicolor."
       },
       "20": {
         "scientific_name": "Ipomoea batatas",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Sweet potato",
+        "tagalog_name": "Kamote",
+        "bicol_name": "Camote",
+        "description": "Ipomoea batatas, also known as sweet potato, is a plant in the morning glory family (Convolvulaceae). It is grown for its edible, starchy, and sweet-tasting tuberous roots, which are used as a root vegetable. The leaves and young shoots are also sometimes eaten as greens."
       },
       "21": {
         "scientific_name": "Jatropha curcas",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Purging nut",
+        "tagalog_name": "Tubang-bakod",
+        "bicol_name": "Tuba-Tuba",
+        "description": "Jatropha curcas is a perennial, monoecious shrub or small tree, native to Mexico and tropical South America, now naturalized in many tropical and subtropical regions. It has thick, softly woody stems and large, alternate leaves with heart-shaped bases and three to five shallow lobes."
       },
       "22": {
         "scientific_name": "Lagerstroemia speciosa",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Queen's Crape Myrtle",
+        "tagalog_name": "Banaba",
+        "bicol_name": "Banaba",
+        "description": "A medium-sized tree with smooth, flaky bark. It has crinkled, crepe-like flowers in panicles, often purple or pink, and blooms in summer and autumn."
       },
       "23": {
         "scientific_name": "Leucaena leucocephala",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "River tamarind",
+        "tagalog_name": "Ipil-Ipil",
+        "bicol_name": "Palo-maria",
+        "description": "It's a small, fast-growing tree with bipinnate leaves, white flowers, and flat, linear pods. It's often used for livestock fodder, soil improvement, and firewood."
       },
       "24": {
         "scientific_name": "Mangifera indica",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Mango",
+        "tagalog_name": "Mangga/Pahutan",
+        "bicol_name": "Mangga",
+        "description": "Mango is a tropical fruit tree in the Anacardiaceae family, commonly known as the king of fruits. It is native to South Asia and is now cultivated worldwide in tropical and subtropical regions."
       },
       "25": {
         "scientific_name": "Manihot esculenta",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Cassava",
+        "tagalog_name": "Kamoteng- kahoy",
+        "bicol_name": "Bilanghoy",
+        "description": "Cassava is a bushy, broadleaf perennial shrub or small tree with tuberous roots, which are the edible part. It is a starch-rich root vegetable, cultivated worldwide for its food and industrial uses. The roots are boiled and eaten or processed into tapioca starch."
       },
       "26": {
         "scientific_name": "Mentha cordifolia Opiz",
-        "english_name": "N/A",
-        "tagalog_name": "N/A",
-        "bicol_name": "N/A",
-        "description": "N/A"
+        "english_name": "Mint",
+        "tagalog_name": "Yerba Buena",
+        "bicol_name": "Herba Buena",
+        "description": "Creeping herb with small, slightly hairy, elliptic to oblong leaves. Dotted with minute oil glands."
       },
       "27": {
         "scientific_name": "Momordica charantia",
-        "english_name": "N/A",
+        "english_name": "Bitter gourd",
         "tagalog_name": "Ampalaya",
-        "bicol_name": "Paria",
-        "description": "Used for diabetes management and bitter tonic in traditional medicine."
+        "bicol_name": "Mariguso",
+        "description": "It's a climbing vine belonging to the Cucurbitaceae family, known for its oblong, green fruits that have a distinct bitter taste."
       },
       "28": {
         "scientific_name": "Moringa oleifera",
-        "english_name": "Moringa",
+        "english_name": "Moringa tree/Drumstick tree",
         "tagalog_name": "Malunggay",
         "bicol_name": "Kalamunggay",
-        "description": "Highly nutritious plant rich in vitamins, minerals, and used for treating inflammation and malnutrition."
+        "description": "The plant is described as a fast-growing, drought-resistant tree with long, slender seed pods. It's known for its nutritional value and diverse uses, including culinary applications and medicinal purposes."
       },
       "29": {
         "scientific_name": "Nerium oleander",
-        "english_name": "Oleander",
+        "english_name": "Oleander/Rosebay",
         "tagalog_name": "Adelfa",
         "bicol_name": "Adelfa",
-        "description": "Toxic plant often used in ornamental landscaping. Not used for internal medicinal purposes."
+        "description": "It's a shrub or small tree with a dense, rounded shape. It has narrow, leathery leaves that are arranged in pairs or whorls of three. The flowers are typically pink, red, or white, and they come in clusters. All parts of the plant are poisonous, including the flowers, leaves, and sap."
       },
       "30": {
         "scientific_name": "Ocimum basilicum",
         "english_name": "Sweet Basil",
-        "tagalog_name": "Basil",
+        "tagalog_name": "Balanoy/Salosi",
         "bicol_name": "Basil",
-        "description": "Used in culinary dishes and for digestive and anti-inflammatory remedies."
+        "description": "Basil is likely native to India and is widely grown as a kitchen herb. The leaves are used fresh or dried to flavour meats, fish, salads, and sauces; basil tea is a stimulant."
       },
       "31": {
         "scientific_name": "Origanum vulgare",
         "english_name": "Oregano",
-        "tagalog_name": "Oregano",
-        "bicol_name": "Oregano",
-        "description": "Used to treat coughs and colds; popular herbal remedy in Philippine households."
+        "tagalog_name": "Kalabo/Suganda",
+        "bicol_name": "Kalabo",
+        "description": "Oregano is a perennial herb, meaning it lives for more than two years. It has a characteristic strong, pungent aroma and is known for its flavor when used in cooking. The leaves are typically olive-green and the flowers are purple. It is native to Europe, the Mediterranean region, and parts of Asia."
       },
       "32": {
         "scientific_name": "Pandanus amaryllifolius",
-        "english_name": "Pandan",
-        "tagalog_name": "Pandan",
+        "english_name": "Scented Pandan",
+        "tagalog_name": "Pandan-mabango",
         "bicol_name": "Pandan",
-        "description": "Commonly used as flavoring and for its calming aroma."
+        "description": "A tropical plant used in cooking and traditional medicine. Its fragrant leaves are used to flavor and color foods, and its oil has medicinal properties in traditional Filipino medicine."
       },
       "33": {
         "scientific_name": "Pepromia pellucida",
         "english_name": "Shiny Bush",
-        "tagalog_name": "Pansit-pansitan",
-        "bicol_name": "Pansit-pansitan",
-        "description": "Used in treating gout and arthritis. Has analgesic and anti-inflammatory properties."
+        "tagalog_name": "Ulasimang Bato",
+        "bicol_name": "Pansit Pansitan",
+        "description": "Also known as Ulasimang Bato, is an herb with various names in different languages and regions. It has a unique description, including shiny, fleshy leaves and succulent stems."
       },
       "34": {
         "scientific_name": "Phyllanthus niruri",
         "english_name": "Stonebreaker",
         "tagalog_name": "Sampa-sampalukan",
-        "bicol_name": "Sampa-sampalukan",
-        "description": "Traditionally used for kidney stones, liver health, and detox."
+        "bicol_name": "Taltalikod/Sampa-sampalukan",
+        "description": "It's a small, branched, annual herb with light green stems and leaves, and its fruits are hidden beneath the leaves."
       },
       "35": {
         "scientific_name": "Premna odorata",
         "english_name": "Aromatic Premna",
         "tagalog_name": "Alagaw",
-        "bicol_name": "Alagaw",
-        "description": "Used for coughs, colds, and food preparation (tinola wrapper)."
+        "bicol_name": "Abgau/Abdaw kahoy",
+        "description": "A small, hairy tree commonly found in the Philippines. It is used in traditional medicine and cuisine."
       },
       "36": {
         "scientific_name": "Psidium guajava",
         "english_name": "Guava",
         "tagalog_name": "Bayabas",
-        "bicol_name": "Bayabas",
-        "description": "Leaves used for treating wounds and diarrhea; fruit is rich in Vitamin C."
+        "bicol_name": "Bayawas",
+        "description": "An evergreen shrub or small tree native to the Caribbean, Central America, and South America. It's a popular fruit-bearing plant known for its edible, aromatic, and seedy pulp. Guava trees can grow up to 10 meters tall and have a shallow root system. They are cultivated in tropical and subtropical regions worldwide."
       },
       "37": {
         "scientific_name": "Senna alata",
         "english_name": "Ringworm Bush",
         "tagalog_name": "Akapulko",
-        "bicol_name": "Akapulko",
-        "description": "Antifungal plant used to treat skin infections such as ringworm."
+        "bicol_name": "Kurukasitas",
+        "description": "Senna alata is an erect shrub or small tree with golden yellow flowers and leaves that have been traditionally used to treat fungal skin infections like ringworm and other fungal skin conditions. It is also known to have laxative and purgative properties."
       },
       "38": {
         "scientific_name": "Tamarindus indica",
         "english_name": "Tamarind",
         "tagalog_name": "Sampalok",
         "bicol_name": "Sampalok",
-        "description": "Used for its sour fruit in cooking; also known for digestive and laxative effects."
+        "description": "Tamarind is a slow-growing tree that can reach heights of 25-30 meters and live for up to 200 years. It has pinnately compound leaves with small, oblong leaflets. The flowers are small, yellow, and often have purple or red veins."
       },
       "39": {
         "scientific_name": "Vitex negundo",
         "english_name": "Five-leaved chaste tree",
         "tagalog_name": "Lagundi",
         "bicol_name": "Lagundi",
-        "description": "Well-known cough remedy recognized by the Philippine DOH."
+        "description": "Vitex negundo is a branched shrub or tree, typically reaching 5 meters in height. It has palmate leaves with 5 leaflets, and its flowers are small, purple, and clustered. It's native to Southeast Asia and is also found in the Philippines, where it's a popular medicinal plant. Well-known cough remedy recognized by the Philippine DOH."
       }
     }
     

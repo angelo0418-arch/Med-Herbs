@@ -239,77 +239,52 @@ p {
 
 
 /* ------------------- prediction style and responsive ------------------- */
+
 .herb-details {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 30px;
-    font-family: 'Segoe UI', sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .herb-item {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
     margin-bottom: 10px;
-    flex-wrap: wrap;
 }
 
 .herb-label {
     font-weight: bold;
-    color: #2d6a4f;
-    width: 200px;
+    color: #4CAF50;
 }
 
 .herb-value {
-    color: #333;
-    flex: 1;
+    padding-left: 10px;
 }
 
 .herb-description,
 .herb-benefit {
-    max-width: 700px;
-    margin: 10px auto;
-    text-align: center;
-    font-size: 16px;
-    color: #333;
-    line-height: 1.6;
+    margin-top: 20px;
+    font-size: 15px;
 }
 
-.herb-description strong,
-.herb-benefit strong {
-    color: #2d6a4f;
-}
-
-
-/* Tablet View */
-@media (max-width: 768px) {
-    .herb-item {
-        flex-direction: row; 
+/* 👇 MOBILE DESIGN */
+@media screen and (max-width: 768px) {
+    .herb-details {
+        grid-template-columns: 1fr;
     }
 
     .herb-label {
-        width: 150px; 
-    }
-}
-
-/* Mobile View */
-@media (max-width: 480px) {
-    .herb-item {
-        flex-direction: column; 
-    }
-
-    .herb-label {
-        width: 100%; 
-        margin-bottom: 5px;
+        font-size: 16px;
     }
 
     .herb-value {
-        width: 100%; 
+        font-size: 15px;
     }
 
     .herb-description,
     .herb-benefit {
-        font-size: 14px;
-        margin: 15px auto;
-        color: #333;
+        font-size: 15px;
     }
 }
+
+
