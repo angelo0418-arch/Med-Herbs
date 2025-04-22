@@ -63,11 +63,11 @@ def predict_image(image_path):
 
     return (
         predicted_herb,
-        herb_benefits.get(predicted_herb, "No available information."),
         herb_data.get("english_name", "N/A"),
         herb_data.get("tagalog_name", "N/A"),
         herb_data.get("bicol_name", "N/A"),
         herb_data.get("description", "No description."),
+        herb_benefits.get(predicted_herb, "No available information."),
         original_image
     )
 

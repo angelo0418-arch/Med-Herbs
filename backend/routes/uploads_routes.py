@@ -79,9 +79,24 @@ def upload_file():
 
         try:
             cursor.execute(
-                "INSERT INTO uploads (user_id, guest_id, image_path, identified_herb, herb_benefit) VALUES (%s, %s, %s, %s, %s)",
-                (user_id if user_id else None, guest_id if guest_id else None, file_path, predicted_herb, benefit)
+                """
+                INSERT INTO uploads 
+                (user_id, guest_id, image_path, identified_herb, english_name, tagalog_name, bicol_name, description, herb_benefit)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                """,
+                (
+                    user_id if user_id else None,
+                    guest_id if guest_id else None,
+                    file_path,
+                    scientific_name,
+                    english_name,
+                    tagalog_name,
+                    bicol_name,
+                    description,
+                    benefit
+                )
             )
+
             conn.commit()
 
             cursor.execute("SELECT LAST_INSERT_ID()")

@@ -21,9 +21,15 @@ function fetchUserData() {
 
 // 🔹 TOGGLE PROFILE VIEW
 function toggleProfile() {
-    const profileSection = document.getElementById('profileSection');
-    profileSection.style.display = profileSection.style.display === 'none' ? 'block' : 'none';
+    const section = document.getElementById("uploadHistorySection");
+    if (section.style.display === "none") {
+        section.style.display = "block";
+        fetchUploadHistory(); // fetch history when showing
+    } else {
+        section.style.display = "none";
+    }
 }
+
 
 // 🔹 SHOW SPECIFIC CONTENT
 function showContent(sectionId) {
@@ -55,6 +61,56 @@ function attachImageUploadListener() {
         console.error("❌ Element #imageUpload not found in DOM!");
     }
 }
+
+
+// 🔹 FETCH UPLOAD HISTORY
+function fetchUploadHistory() {
+    fetch('/predict/upload_history')
+        .then(response => response.json())
+        .then(data => {
+            const historyContainer = document.getElementById("uploadHistory");
+
+            if (!historyContainer) {
+                console.warn("⚠️ Element with ID 'uploadHistory' not found.");
+                return;
+            }
+
+            if (data.error) {
+                historyContainer.innerHTML = `<p class="text-danger">❌ ${data.error}</p>`;
+                return;
+            }
+
+            if (data.length === 0) {
+                historyContainer.innerHTML = "<p>No upload history found.</p>";
+                return;
+            }
+
+            // Clear previous content
+            historyContainer.innerHTML = "";
+
+            data.forEach(entry => {
+                const item = document.createElement("div");
+                item.classList.add("upload-item");
+
+                const imageUrl = `/static/uploads/${entry.image_path}`;
+
+                item.innerHTML = `
+                    <div><strong>🌿 Herb:</strong> ${entry.identified_herb}</div>
+                    <div><strong>💚 Benefit:</strong> ${entry.herb_benefit}</div>
+                    <div><strong>🖼️ Image:</strong><br>
+                        <img src="${imageUrl}" alt="Uploaded Herb Image" style="max-width: 100%; height: auto; margin-top: 5px; border-radius: 8px;"/>
+                    </div>
+                    <hr/>
+                `;
+                historyContainer.appendChild(item);
+            });
+        })
+        .catch(error => {
+            console.error("❌ Failed to fetch upload history:", error);
+        });
+}
+
+
 
 function handleImageUpload() {
     const fileInput = document.getElementById('imageUpload');
@@ -223,7 +279,6 @@ function logout(event) {
             }
         });
 }
-
 
 // 🔹 CLOSE OFFCANVAS
 function closeOffcanvas() {

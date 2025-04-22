@@ -114,9 +114,23 @@ def predict_image_route():
                 return jsonify({"error": "User does not exist in the database."}), 400
 
         cursor.execute(""" 
-            INSERT INTO uploads (user_id, guest_id, image_path, identified_herb, herb_benefit) 
-            VALUES (%s, %s, %s, %s, %s)
-        """, (user_id if user_id else None, guest_id if guest_id else None, file_path, scientific_name, benefit))
+            INSERT INTO uploads (
+                user_id, guest_id, image_path, 
+                identified_herb, english_name, tagalog_name, 
+                bicol_name, description, herb_benefit
+            ) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (
+            user_id if user_id else None,
+            guest_id if guest_id else None,
+            file_path,
+            scientific_name,
+            english_name,
+            tagalog_name,
+            bicol_name,
+            description,
+            benefit
+        ))
 
         conn.commit()
         print("✅ Saved prediction to database.")
@@ -137,3 +151,38 @@ def predict_image_route():
         "description": description,
         "benefit": benefit
     }), 200
+    
+
+    
+#--------------------------------Routes for upload history-----------------------------------
+    
+@predict_bp.route('/upload_history', methods=['GET'])
+def get_upload_history():
+    user_id = session.get("user_id")
+    if not user_id:
+        return jsonify({"error": "User not logged in"}), 401
+
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT identified_herb, english_name, tagalog_name, bicol_name, description, herb_benefit, image_path
+            FROM uploads
+            WHERE user_id = %s
+            ORDER BY uploaded_at DESC
+        """, (user_id,))
+        uploads = cursor.fetchall()
+
+        # ✅ Baguhin ang image_path sa filename lang
+        for upload in uploads:
+            filename = os.path.basename(upload['image_path'])  # Extract filename from full path
+            upload['image_path'] = filename
+
+        return jsonify(uploads), 200
+    except Exception as e:
+        print(f"❌ Error fetching upload history: {e}")
+        return jsonify({"error": "Failed to fetch upload history"}), 500
+    finally:
+        cursor.close()
+        conn.close()
