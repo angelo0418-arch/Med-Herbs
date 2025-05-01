@@ -179,6 +179,10 @@ table {
     margin: 0 auto; 
 } 
 
+.confidence-score {
+    margin-bottom: 40px;
+}
+
 
 
 

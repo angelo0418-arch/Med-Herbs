@@ -179,7 +179,14 @@ function handleImageUpload() {
                 prediction.innerHTML = '⚠️ ' + data.warning;
             }else {
                 prediction.innerHTML = `
-                <div class="herb-details">
+                <div class="confidence-score section-spacing">
+                    <div class="herb-item">
+                        <div class="herb-label">✅ Confidence Score:</div>
+                        <div class="herb-value">${data.confidence}%</div>
+                    </div>
+                </div>
+            
+                <div class="herb-details section-spacing">
                     <div class="herb-item">
                         <div class="herb-label">🌿 Scientific Name:</div>
                         <div class="herb-value">${data.scientific_name}</div>
@@ -198,18 +205,17 @@ function handleImageUpload() {
                     </div>
                 </div>
             
-                <div class="herb-description">
+                <div class="herb-description section-spacing">
                     📖 <strong>Description:</strong> ${data.description}
                 </div>
             `;
             
             benefit.innerHTML = `
-                <div class="herb-benefit">
+                <div class="herb-benefit section-spacing">
                     💚 <strong>Benefits:</strong> ${data.benefit}
                 </div>
-            `;                    
-            }
-            
+            `;                 
+            }     
         })
         .catch(error => {
             loading.style.display = 'none';

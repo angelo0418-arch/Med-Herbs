@@ -60,8 +60,9 @@ def predict_image(image_path):
         return None, None, None, None, None, "Error processing image."
 
     prediction = model.predict(img_array)
+    confidence = float(np.max(prediction))  # Isa lang dapat ito
     predicted_class = np.argmax(prediction)
-    confidence = np.max(prediction)
+
 
     if confidence < 0.5:
         return None, None, None, None, None, "Confidence level too low. Prediction failed."
@@ -75,7 +76,8 @@ def predict_image(image_path):
     description = herb_data.get("description", "No description.")
     benefit = herb_benefits.get(scientific_name, "No benefits information.")
 
-    return scientific_name, english_name, tagalog_name, bicol_name, description, benefit
+    return confidence, scientific_name, english_name, tagalog_name, bicol_name, description, benefit
+
 
 # 🔹 Blueprint setup
 predict_bp = Blueprint('predict', __name__)  # Define the Blueprint
@@ -93,7 +95,7 @@ def predict_image_route():
     file.save(file_path)
 
     # Predict
-    scientific_name, english_name, tagalog_name, bicol_name, description, benefit = predict_image(file_path)
+    confidence, scientific_name, english_name, tagalog_name, bicol_name, description, benefit = predict_image(file_path)
 
     if scientific_name is None:
         return jsonify({'warning': benefit}), 200
@@ -143,6 +145,7 @@ def predict_image_route():
 
     # Return to frontend
     return jsonify({
+        "confidence": f"{confidence * 100:.2f}",  # convert to percent string
         "herb": scientific_name,
         "scientific_name": scientific_name,
         "english_name": english_name,

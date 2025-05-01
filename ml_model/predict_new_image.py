@@ -37,7 +37,7 @@ except Exception as e:
 # 🔹 IMAGE PREPROCESSING
 def load_and_prepare_image(img_path):
     try:
-        img = image.load_img(img_path, target_size=(224, 224))
+        img = image.load_img(img_path, target_size=(224, 224)).convert('RGB')
         img_array = image.img_to_array(img) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
         return img_array, img
@@ -62,8 +62,9 @@ def predict_image(image_path):
     herb_data = class_indices.get(str(predicted_class_index), {})
 
     return (
+        confidence,
         predicted_herb,
-        herb_data.get("english_name", "N/A"),
+        herb_data.get("english_name", "N/A"),   
         herb_data.get("tagalog_name", "N/A"),
         herb_data.get("bicol_name", "N/A"),
         herb_data.get("description", "No description."),
