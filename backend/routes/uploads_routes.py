@@ -10,7 +10,7 @@ uploads_bp = Blueprint('uploads', __name__)
 
 # 🔹 CONFIGURATION
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "../../uploads")
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../static/uploads")
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 # ✅ Siguraduhin na may `uploads` folder
@@ -35,6 +35,10 @@ def upload_file():
         filename = secure_filename(file.filename)
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         file.save(file_path)
+        
+        # ✅ Print para makita sa terminal kung saan nai-save ang file
+        print(f"[UPLOAD] File saved at: {file_path}")
+        print(f"[UPLOAD] Accessible via: /static/uploads/{filename}")
 
         # ✅ Kunin ang `user_id` o `guest_id`
         user_id = request.form.get("user_id")
@@ -112,7 +116,7 @@ def upload_file():
         return jsonify({
             "message": "File uploaded and saved to database!",
             "upload_id": upload_id,
-            "file_path": file_path,
+            "file_path": f"/static/uploads/{filename}",
             "predicted_herb": predicted_herb,
             "benefit": benefit
         }), 201

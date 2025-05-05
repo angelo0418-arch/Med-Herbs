@@ -26,7 +26,7 @@ CORS(app)
 # 🔹 CONFIGURATION
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ML_MODEL_DIR = os.path.join(BASE_DIR, "../ml_model")
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+UPLOAD_FOLDER = os.path.abspath(os.path.join(BASE_DIR, 'backend', 'static', 'uploads'))
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 if not os.path.exists(UPLOAD_FOLDER):

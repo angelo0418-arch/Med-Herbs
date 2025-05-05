@@ -11,7 +11,7 @@ from flask import session
 # 🔹 CONFIGURATION
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ML_MODEL_DIR = os.path.join(BASE_DIR, "../../ml_model")
-UPLOAD_FOLDER = os.path.join(BASE_DIR, "../../uploads")
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "../static/uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)  
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -33,7 +33,7 @@ herb_benefits = {}
 
 try:
     with open(LABELS_PATH, "r") as file:
-        class_indices = json.load(file)
+        class_indices = json.load(file) 
         print("✅ class_indices.json loaded!")
 
     with open(BENEFITS_PATH, "r") as file:
@@ -45,7 +45,7 @@ except Exception as e:
 # 🔹 Preprocess image
 def preprocess_image(image_path):
     try:
-        img = Image.open(image_path).resize((224, 224))
+        img = Image.open(image_path).convert('RGB').resize((224, 224))  # ← dagdag ang .convert('RGB')
         img_array = np.array(img) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
         return img_array
@@ -57,16 +57,21 @@ def preprocess_image(image_path):
 def predict_image(image_path):
     img_array = preprocess_image(image_path)
     if img_array is None:
-        return None, None, None, None, None, "Error processing image."
+        return None, None, None, None, None, None, "Error processing image."
 
     prediction = model.predict(img_array)
     confidence = float(np.max(prediction))  # Isa lang dapat ito
     predicted_class = np.argmax(prediction)
 
-
+    
     if confidence < 0.5:
-        return None, None, None, None, None, "Confidence level too low. Prediction failed."
+        return None, None, None, None, None, None, (
+            '<span style="color: #d9534f; font-style: italic;">'
+            'We could not confidently identify the herb. Please upload a clear image of a medicinal plant.'
+            '</span>'
+        )
 
+    
     herb_data = class_indices.get(str(predicted_class), {})
     
     scientific_name = herb_data.get("scientific_name", "Unknown")
