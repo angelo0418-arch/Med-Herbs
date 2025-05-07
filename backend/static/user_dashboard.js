@@ -33,7 +33,7 @@ function toggleProfile() {
 
 // 🔹 SHOW SPECIFIC CONTENT
 function showContent(sectionId) {
-    const sections = ['main-wrapper', 'user-guide', 'about'];
+    const sections = ['main-wrapper', 'user-guide', 'about', 'upload-history']; // ← idinagdag ko 'upload-history'
 
     sections.forEach(id => {
         const section = document.getElementById(id);
@@ -47,9 +47,9 @@ function showContent(sectionId) {
         targetSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // I-close ang offcanvas pagkatapos mag-click ng link
     closeOffcanvas();
 }
+
 
 // 🔹 HANDLE IMAGE UPLOAD
 function attachImageUploadListener() {
