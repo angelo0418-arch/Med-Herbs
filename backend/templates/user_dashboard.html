@@ -108,17 +108,18 @@
         </div>
     </div>
 
+     <!-- Results History-->
     <div id="profileSection" style="display: none;">
-        <h5 class="text-center">Upload History</h5>
         <p class="text-center">User: {{ session['username'] if 'username' in session else 'Guest' }}</p>       
     </div>
 
+    
     <div id="upload-history" class="d-none">
-        <h3>Upload History</h3>
+        <h3 class="text-center">Upload History</h3>
         <div id="uploadHistory"></div>
     </div>
 
-    <div id="user-guide" class="content p-5 d-none mt-5">
+    <div id="user-guide" class="content p-4 d-none mt-5">
         <h4>How to Use MedHerbs:</h4>
         <br>
         <h4>Visit the Homepage</h4>
@@ -165,7 +166,7 @@
         <p>Logged-in users can view their upload history. Guests can upload but not save records.</p>
     </div>
 
-    <div id="about" class="content p-5 d-none mt-5">
+    <div id="about" class="content p-4 d-none mt-5">
         <h4>About Us</h4>
         <p>The **Traditional Local Medicinal Herb Identification System** is a modern and easy-to-use platform aimed at helping people discover local medicinal herbs and their health benefits. Through advanced image recognition technology, the system provides quick and accurate information to identify herbs with the potential to be used for natural remedies.</p>
         <br>

@@ -13,17 +13,17 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from preprocessing.data_loader import load_data  # Absolute import
 
 
-model = load_model('herb_classifier_model.h5')
+model = load_model('herb_identification_model.h5')
 
 
 with open('class_indices.json', 'r') as json_file:
     class_indices = json.load(json_file)
-    class_labels = {int(k): re.sub(r'^\d+\s*', '', v) for k, v in class_indices.items()}
+    class_labels = {int(k): v['english_name'] for k, v in class_indices.items()}
     label_names = list(class_labels.values())
 
 
 _, _, test_data = load_data()
-
+    
 
 loss, accuracy = model.evaluate(test_data)
 print(f"\n📊 Test Loss: {loss:.4f}")
@@ -37,6 +37,13 @@ y_pred = np.argmax(y_pred_prob, axis=1)
 
 print("\n📊 Classification Report:")
 print(classification_report(y_true, y_pred, target_names=label_names))
+
+from sklearn.metrics import f1_score
+
+# Compute weighted F1 score
+f1 = f1_score(y_true, y_pred, average='weighted')
+print(f"🧪 Weighted F1 Score: {f1:.4f}")
+
 
 
 conf_matrix = confusion_matrix(y_true, y_pred)
