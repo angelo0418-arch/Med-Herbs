@@ -4,7 +4,7 @@ from .data_augmentation import get_data_generator
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # ✅ Global Setting: Madaling Baguhin ang Batch Size Dito
-BATCH_SIZE = 16  # Mas mababang batch size para bawas memory usage
+BATCH_SIZE = 16  
 
 # ✅ Function: Pag-check ng Dataset Directory
 def check_directory(directory):
