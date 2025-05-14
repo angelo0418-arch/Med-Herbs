@@ -9,12 +9,12 @@ services:
       - key: FLASK_ENV
         value: production
       - key: MYSQL_HOST
-        value: ${localhost}  # Gamitin ang value mula sa .env
+        value: ${MYSQL_HOST}  # Gamitin ang value mula sa .env
       - key: MYSQL_USER
-        value: ${root}  # Gamitin ang value mula sa .env
+        value: ${MYSQL_USER}  # Gamitin ang value mula sa .env
       - key: MYSQL_PASSWORD
-        value: ${@SorsuBC#404}  # Gamitin ang value mula sa .env
+        value: ${MYSQL_PASSWORD}  # Gamitin ang value mula sa .env
       - key: MYSQL_DATABASE
-        value: ${medherbs_db}  # Gamitin ang value mula sa .env
+        value: ${MYSQL_DATABASE}  # Gamitin ang value mula sa .env
       - key: SECRET_KEY
-        value: ${10000}  # Gamitin ang value mula sa .env
+        value: ${SECRET_KEY}  # Gamitin ang value mula sa .env
