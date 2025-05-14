@@ -11,10 +11,6 @@ import tensorflow as tf
 from datetime import datetime
 import logging
 
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), 'routes'))
-
-
 # ✅ Import Blueprints
 from routes.herb_routes import herbs_bp
 from routes.uploads_routes import uploads_bp
