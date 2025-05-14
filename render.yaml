@@ -2,8 +2,19 @@ services:
   - type: web
     name: med-herbs
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn backend.app:app
+    rootDir: backend
+    buildCommand: pip install -r ../requirements.txt
+    startCommand: gunicorn app:app
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: MYSQL_HOST
+        value: ${localhost}  # Gamitin ang value mula sa .env
+      - key: MYSQL_USER
+        value: ${root}  # Gamitin ang value mula sa .env
+      - key: MYSQL_PASSWORD
+        value: ${@SorsuBC#404}  # Gamitin ang value mula sa .env
+      - key: MYSQL_DATABASE
+        value: ${medherbs_db}  # Gamitin ang value mula sa .env
+      - key: SECRET_KEY
+        value: ${10000}  # Gamitin ang value mula sa .env
